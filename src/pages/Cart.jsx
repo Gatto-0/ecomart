@@ -79,7 +79,7 @@ function CartRow({ item }) {
               onClick={() => setQty(item.slug, item.qty - 1)}
               disabled={item.qty <= 1}
               aria-label="Decrease quantity"
-              className="w-8 h-8 flex items-center justify-center text-forest hover:bg-forest/5 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+              className="w-8 h-8 flex items-center justify-center text-forest hover:bg-forest/5 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors btn-minor"
             >
               <Minus size={14} aria-hidden="true" />
             </button>
@@ -90,7 +90,7 @@ function CartRow({ item }) {
               type="button"
               onClick={() => setQty(item.slug, item.qty + 1)}
               aria-label="Increase quantity"
-              className="w-8 h-8 flex items-center justify-center text-forest hover:bg-forest/5 cursor-pointer transition-colors"
+              className="w-8 h-8 flex items-center justify-center text-forest hover:bg-forest/5 cursor-pointer transition-colors btn-minor"
             >
               <Plus size={14} aria-hidden="true" />
             </button>
@@ -105,7 +105,7 @@ function CartRow({ item }) {
               type="button"
               onClick={() => removeItem(item.slug)}
               aria-label={`Remove ${product.name} from cart`}
-              className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-clay transition-colors cursor-pointer"
+              className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-clay transition-colors cursor-pointer btn-minor"
             >
               <Trash2 size={16} aria-hidden="true" />
             </button>
@@ -180,7 +180,7 @@ export default function Cart() {
         </p>
         <Link
           to="/shop"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors btn-major"
         >
           Browse the shop <ArrowRight size={16} aria-hidden="true" />
         </Link>
@@ -234,7 +234,7 @@ export default function Cart() {
             <button
               type="button"
               onClick={() => navigate('/checkout')}
-              className="w-full py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors flex items-center justify-center gap-2 cursor-pointer btn-major"
             >
               Checkout <ArrowRight size={16} aria-hidden="true" />
             </button>

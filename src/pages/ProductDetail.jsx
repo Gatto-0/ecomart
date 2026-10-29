@@ -235,7 +235,7 @@ export default function ProductDetail() {
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 disabled={qty <= 1}
                 aria-label="Decrease quantity"
-                className="w-10 h-10 flex items-center justify-center text-forest hover:bg-forest/5 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-forest hover:bg-forest/5 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors btn-minor"
               >
                 <Minus size={16} aria-hidden="true" />
               </button>
@@ -246,7 +246,7 @@ export default function ProductDetail() {
                 type="button"
                 onClick={() => setQty((q) => q + 1)}
                 aria-label="Increase quantity"
-                className="w-10 h-10 flex items-center justify-center text-forest hover:bg-forest/5 cursor-pointer transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-forest hover:bg-forest/5 cursor-pointer transition-colors btn-minor"
               >
                 <Plus size={16} aria-hidden="true" />
               </button>
@@ -255,7 +255,7 @@ export default function ProductDetail() {
             <button
               type="button"
               onClick={handleAddToCart}
-              className={`flex-1 py-3 px-6 rounded-full font-semibold text-sm transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              className={`flex-1 py-3 px-6 rounded-full font-semibold text-sm transition-all cursor-pointer flex items-center justify-center gap-2 btn-major ${
                 added
                   ? 'bg-leaf text-cream'
                   : 'bg-forest text-cream hover:bg-forest/90 active:scale-[0.98]'

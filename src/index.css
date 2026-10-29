@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
 @import "@fontsource/fraunces/600.css";
 @import "@fontsource/fraunces/700.css";
 @import "@fontsource/inter/400.css";
@@ -7,25 +8,186 @@
 @import "@fontsource/inter/600.css";
 
 @theme {
-  --color-forest: #1F3D2B;
-  --color-leaf: #4C9A5F;
-  --color-cream: #F6F1E7;
-  --color-clay: #C8773C;
-  --color-sun: #E2B646;
+  --color-forest: #2F4A35;
+  --color-forest-dark: #1F3D2B;
+  --color-cream: #FBF3E4;
+  --color-sage: #E4EBDD;
+  --color-walnut: #7A5638;
+  --color-walnut-dark: #5A3D12;
+  --color-marigold: #E3A63B;
+  --color-marigold-pale: #F6E3B8;
+  --color-marigold-text: #5A3D12;
+  --color-terracotta: #C4694A;
+  --color-terracotta-pale: #F3D5C8;
+  --color-terracotta-text: #6E2F1B;
+  --color-sand: #A07B52;
+  --color-leaf: #5E8C4A;
   --color-charcoal: #222A25;
+  --color-clay: #C4694A;
+  --color-sun: #E3A63B;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Fraunces", ui-serif, Georgia, serif;
 }
 
+:root {
+  --forest: #2F4A35;
+  --cream: #FBF3E4;
+  --sage: #E4EBDD;
+  --walnut: #7A5638;
+  --marigold: #E3A63B;
+  --terracotta: #C4694A;
+  --sand: #A07B52;
+  --leaf: #5E8C4A;
+  --oak: #6F4E32;
+  --leaf-brown: #B59B5A;
+}
+
 @layer base {
   body {
-    background-color: var(--color-cream);
-    color: var(--color-charcoal);
+    background-color: var(--cream);
+    color: var(--forest);
     font-family: var(--font-sans);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+}
+
+/* Top bar navigation option styling & animation */
+.topbar-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.topbar-nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--forest);
+  background-color: transparent;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, font-size 150ms ease;
+  outline: none;
+}
+
+.topbar-nav-link:focus-visible {
+  outline: 2px solid var(--walnut);
+  outline-offset: 2px;
+}
+
+.topbar-nav-link:hover,
+.topbar-nav-link:focus-visible {
+  background-color: var(--walnut);
+  color: var(--cream);
+  font-size: 18px;
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-nav-link {
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  .topbar-nav-link:hover,
+  .topbar-nav-link:focus-visible {
+    transform: none;
+    font-size: 16px;
+  }
+}
+
+/* Button Pop: Major Buttons */
+.btn-major {
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  outline: none;
+}
+.btn-major:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 14px rgba(47, 74, 53, 0.16);
+}
+.btn-major:active {
+  transform: translateY(0) scale(0.98);
+}
+.btn-major:focus-visible {
+  outline: 2px solid var(--walnut);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-major {
+    transition: box-shadow 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .btn-major:hover,
+  .btn-major:active {
+    transform: none !important;
+  }
+}
+
+/* Button Pop: Minor and Icon Buttons */
+.btn-minor {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  outline: none;
+}
+.btn-minor:hover {
+  background-color: var(--sage);
+}
+.btn-minor:focus-visible {
+  outline: 2px solid var(--walnut);
+  outline-offset: 2px;
+}
+
+/* Primary & Secondary button rules */
+.btn-primary {
+  background-color: var(--forest);
+  color: var(--cream);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: background-color 150ms ease;
+}
+.btn-primary:hover {
+  background-color: #243c2b;
+}
+
+.btn-secondary {
+  border: 1.5px solid var(--walnut);
+  color: var(--walnut);
+  background-color: transparent;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 150ms ease;
+}
+.btn-secondary:hover {
+  background-color: var(--walnut);
+  color: var(--cream);
+}
+
+/* Eco Buddy Pulse Animation */
+@keyframes eco-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(227, 166, 59, 0.65);
+  }
+  30% {
+    box-shadow: 0 0 0 14px rgba(227, 166, 59, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(227, 166, 59, 0);
+  }
+}
+
+.eco-buddy-pulse {
+  animation: eco-pulse 4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-buddy-pulse {
+    animation: none !important;
   }
 }

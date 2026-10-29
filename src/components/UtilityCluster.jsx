@@ -21,7 +21,7 @@ export default function UtilityCluster({
       <Link
         to="/wishlist"
         aria-label="Wishlist"
-        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1"
+        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
       >
         <Heart size={18} aria-hidden="true" />
         {wishlistCount > 0 && (
@@ -35,7 +35,7 @@ export default function UtilityCluster({
       <Link
         to="/cart"
         aria-label="Cart"
-        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1"
+        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
       >
         <ShoppingCart size={18} aria-hidden="true" />
         <span className="absolute -top-1 -right-2 flex items-center justify-center min-w-4 h-4 px-1 rounded-full bg-clay text-cream text-[10px] font-semibold leading-none">
@@ -47,7 +47,7 @@ export default function UtilityCluster({
       <Link
         to="/login"
         aria-label="Login"
-        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1"
+        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
       >
         <User size={18} aria-hidden="true" />
       </Link>
@@ -58,7 +58,7 @@ export default function UtilityCluster({
         type="button"
         onClick={onOpenMenu}
         aria-label="Open menu"
-        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
+        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf rounded-full btn-minor"
       >
         <Menu size={18} aria-hidden="true" />
       </button>

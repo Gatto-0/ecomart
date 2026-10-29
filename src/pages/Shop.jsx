@@ -112,7 +112,7 @@ function ActiveChips({ query, filters, onRemoveQuery, onUpdateFilters }) {
             type="button"
             onClick={onRemove}
             aria-label={`Remove filter: ${label}`}
-            className="text-forest/60 hover:text-forest transition-colors cursor-pointer"
+            className="text-forest/60 hover:text-forest transition-colors cursor-pointer btn-minor p-0.5 rounded-full"
           >
             <XIcon size={12} aria-hidden="true" />
           </button>
@@ -142,7 +142,7 @@ function EmptyState({ query }) {
       <button
         type="button"
         onClick={handleAskBuddy}
-        className="mt-2 px-5 py-2.5 rounded-full bg-forest text-cream text-sm font-semibold hover:bg-forest/90 transition-colors cursor-pointer"
+        className="mt-2 px-5 py-2.5 rounded-full bg-forest text-cream text-sm font-semibold hover:bg-forest/90 transition-colors cursor-pointer btn-major"
       >
         Ask Eco Buddy to find something similar
       </button>
@@ -154,7 +154,7 @@ export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   // Initialise categories from URL on first render
-  const [filters, setFilters] = useState(() => {
+  const [appliedFilters, setAppliedFilters] = useState(() => {
     const cat = searchParams.get('category')
     return { ...DEFAULT_FILTERS, categories: cat ? [cat] : [] }
   })
@@ -163,49 +163,42 @@ export default function Shop() {
   const [sort, setSort] = useState('eco-high')
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  // Derive the current ?category= value so we can react to it without a setState-in-effect
+  // Keep applied filters in sync if URL category changes externally (e.g. navigation)
   const urlCategory = searchParams.get('category')
-  const filtersWithUrl = useMemo(() => {
-    // If the URL has a category that isn't already in filters, inject it.
-    // This handles back/forward navigation and external links.
-    if (urlCategory && !filters.categories.includes(urlCategory)) {
-      return { ...filters, categories: [urlCategory] }
+  useEffect(() => {
+    if (urlCategory) {
+      setAppliedFilters((prev) => {
+        if (prev.categories.length === 1 && prev.categories[0] === urlCategory) return prev
+        return { ...prev, categories: [urlCategory] }
+      })
     }
-    return filters
-  }, [urlCategory, filters])
+  }, [urlCategory])
 
   const searchResults = useMemo(() => searchProducts(query), [query])
-  const filtered = useMemo(() => applyFilters(searchResults, filtersWithUrl), [searchResults, filtersWithUrl])
+  const filtered = useMemo(() => applyFilters(searchResults, appliedFilters), [searchResults, appliedFilters])
   const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort])
 
   // Category counts from search results minus any category filter
   const searchOnlyFiltered = useMemo(
-    () => applyFilters(searchResults, { ...filtersWithUrl, categories: [] }),
-    [searchResults, filtersWithUrl]
+    () => applyFilters(searchResults, { ...appliedFilters, categories: [] }),
+    [searchResults, appliedFilters]
   )
   const productCounts = useMemo(() => buildCategoryCounts(searchOnlyFiltered), [searchOnlyFiltered])
 
-  const handleClearAll = () => {
-    setFilters(DEFAULT_FILTERS)
-    setQuery('')
-    setSearchParams({}, { replace: true })
-  }
-
-  const handleFiltersChange = (next) => {
-    setFilters(next)
-    if (next.categories.length === 1) {
-      setSearchParams({ category: next.categories[0] }, { replace: true })
+  const handleApplyFilters = (nextDraft) => {
+    setAppliedFilters(nextDraft)
+    if (nextDraft.categories.length === 1) {
+      setSearchParams({ category: nextDraft.categories[0] }, { replace: true })
     } else {
       setSearchParams({}, { replace: true })
     }
   }
 
-  // Keep URL in sync when filters change externally (e.g. clear all)
-  useEffect(() => {
-    if (urlCategory && !filtersWithUrl.categories.includes(urlCategory)) {
-      setSearchParams({}, { replace: true })
-    }
-  }, [urlCategory, filtersWithUrl.categories, setSearchParams])
+  const handleClearAll = () => {
+    setAppliedFilters(DEFAULT_FILTERS)
+    setQuery('')
+    setSearchParams({}, { replace: true })
+  }
 
   return (
     <div className="bg-cream min-h-screen">
@@ -225,10 +218,10 @@ export default function Shop() {
         <div className="flex gap-6 lg:gap-8 items-start">
           {/* Filter panel */}
           <FilterPanel
-            filters={filtersWithUrl}
+            filters={appliedFilters}
             categories={categories}
             productCounts={productCounts}
-            onChange={handleFiltersChange}
+            onApply={handleApplyFilters}
             onClearAll={handleClearAll}
             mobileOpen={mobileFiltersOpen}
             onMobileClose={() => setMobileFiltersOpen(false)}
@@ -269,9 +262,9 @@ export default function Shop() {
             {/* Active filter chips */}
             <ActiveChips
               query={query}
-              filters={filtersWithUrl}
+              filters={appliedFilters}
               onRemoveQuery={() => setQuery('')}
-              onUpdateFilters={handleFiltersChange}
+              onUpdateFilters={handleApplyFilters}
             />
 
             {/* Product grid */}

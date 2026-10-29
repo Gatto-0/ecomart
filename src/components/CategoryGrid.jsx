@@ -45,6 +45,7 @@ export default function CategoryGrid() {
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-forest tracking-tight">
           Find your swap
         </h2>
+        <div className="w-12 h-[3px] bg-marigold mt-3 rounded-full" aria-hidden="true" />
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -55,7 +56,7 @@ export default function CategoryGrid() {
             <Link
               key={category.slug}
               to={`/shop?category=${category.slug}`}
-              className={`group relative overflow-hidden rounded-2xl block bg-[#CBD5C8] ${
+              className={`group relative overflow-hidden rounded-2xl rounded-l-none border-l-4 border-l-walnut block bg-[#CBD5C8] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
                 isLarge
                   ? 'col-span-1 lg:col-span-2 h-56 sm:h-72 lg:h-80'
                   : 'col-span-1 lg:col-span-1 h-48 sm:h-60 lg:h-64'

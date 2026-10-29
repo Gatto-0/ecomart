@@ -46,16 +46,19 @@ export default function TopPicks() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header with Title & Arrow Buttons */}
         <div className="flex items-end justify-between mb-8 sm:mb-10">
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-forest tracking-tight">
-            Top eco picks
-          </h2>
+          <div>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-forest tracking-tight">
+              Top eco picks
+            </h2>
+            <div className="w-12 h-[3px] bg-marigold mt-3 rounded-full" aria-hidden="true" />
+          </div>
 
           <div className="hidden md:flex items-center gap-2">
             <button
               type="button"
               onClick={() => scroll('left')}
               aria-label="Scroll left"
-              className="w-11 h-11 rounded-full bg-forest text-cream flex items-center justify-center hover:bg-forest/90 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf"
+              className="w-11 h-11 rounded-full bg-forest text-cream flex items-center justify-center hover:bg-forest/90 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf btn-minor"
             >
               <ChevronLeft size={20} aria-hidden="true" />
             </button>
@@ -63,7 +66,7 @@ export default function TopPicks() {
               type="button"
               onClick={() => scroll('right')}
               aria-label="Scroll right"
-              className="w-11 h-11 rounded-full bg-forest text-cream flex items-center justify-center hover:bg-forest/90 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf"
+              className="w-11 h-11 rounded-full bg-forest text-cream flex items-center justify-center hover:bg-forest/90 transition-colors shadow-xs cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf btn-minor"
             >
               <ChevronRight size={20} aria-hidden="true" />
             </button>
@@ -109,7 +112,7 @@ export default function TopPicks() {
             </p>
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors shadow-xs btn-major"
             >
               <span>View all products</span>
               <ArrowRight size={16} aria-hidden="true" />

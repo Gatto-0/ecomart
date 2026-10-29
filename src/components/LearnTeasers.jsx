@@ -12,7 +12,7 @@ function TeaserBox({ topic, index }) {
     <article
       aria-label={topic.title}
       style={{ backgroundColor: fallbackBg }}
-      className="group relative w-full rounded-2xl md:rounded-3xl overflow-hidden h-auto md:h-[360px] flex flex-col justify-center border border-forest/10 p-6 sm:p-8 md:p-12 transition-shadow hover:shadow-md"
+      className="group relative w-full rounded-2xl md:rounded-3xl rounded-l-none border-l-4 border-l-walnut overflow-hidden h-auto md:h-[360px] flex flex-col justify-center border-y border-r border-forest/10 p-6 sm:p-8 md:p-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
       {/* Background Image with Fallback */}
       {topic.image && !imageFailed && (
@@ -81,27 +81,30 @@ export default function LearnTeasers() {
   const teaserTopics = topics.slice(0, 4)
 
   return (
-    <section className="py-20 sm:py-28 px-6 max-w-7xl mx-auto w-full border-t border-forest/10">
-      <div className="flex flex-col items-start mb-8 sm:mb-12">
-        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-forest tracking-tight">
-          Why it matters
-        </h2>
-      </div>
+    <section className="w-full bg-forest text-cream py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-6 w-full">
+        <div className="flex flex-col items-start mb-8 sm:mb-12">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-cream tracking-tight">
+            Why it matters
+          </h2>
+          <div className="w-12 h-[3px] bg-marigold mt-3 rounded-full" aria-hidden="true" />
+        </div>
 
-      <div className="flex flex-col gap-6 sm:gap-8">
-        {teaserTopics.map((topic, index) => (
-          <TeaserBox key={topic.slug} topic={topic} index={index} />
-        ))}
-      </div>
+        <div className="flex flex-col gap-6 sm:gap-8">
+          {teaserTopics.map((topic, index) => (
+            <TeaserBox key={topic.slug} topic={topic} index={index} />
+          ))}
+        </div>
 
-      {/* Centered Explore all topics button */}
-      <div className="mt-12 sm:mt-16 flex justify-center">
-        <Link
-          to="/learn"
-          className="inline-flex items-center px-8 py-3.5 rounded-full bg-forest text-cream font-medium text-base hover:bg-forest/90 transition-colors shadow-sm"
-        >
-          Explore all topics
-        </Link>
+        {/* Centered Explore all topics button */}
+        <div className="mt-12 sm:mt-16 flex justify-center">
+          <Link
+            to="/learn"
+            className="inline-flex items-center px-8 py-3.5 rounded-full bg-cream text-forest font-medium text-base hover:bg-cream/90 transition-colors shadow-sm btn-major"
+          >
+            Explore all topics
+          </Link>
+        </div>
       </div>
     </section>
   )

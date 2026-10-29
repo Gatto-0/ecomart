@@ -1,6 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { X, SlidersHorizontal } from 'lucide-react'
 import { bands } from '../data/ecoScore'
+
+const DEFAULT_FILTERS = {
+  categories: [],
+  bands: [],
+  minPrice: '',
+  maxPrice: '',
+}
 
 function CategoryList({ categories, selected, onChange, productCounts }) {
   return (
@@ -25,7 +32,7 @@ function CategoryList({ categories, selected, onChange, productCounts }) {
                         : [...selected, cat.slug]
                     )
                   }}
-                  className="accent-forest w-4 h-4 rounded shrink-0"
+                  className="accent-forest w-4 h-4 rounded shrink-0 cursor-pointer"
                 />
                 <span className="text-sm text-charcoal/80 group-hover:text-charcoal transition-colors flex-1 leading-tight">
                   {cat.name}
@@ -62,7 +69,7 @@ function BandList({ selected, onChange }) {
                         : [...selected, band.key]
                     )
                   }}
-                  className="accent-forest w-4 h-4 rounded shrink-0"
+                  className="accent-forest w-4 h-4 rounded shrink-0 cursor-pointer"
                 />
                 <span
                   className="w-3 h-3 rounded-full shrink-0"
@@ -96,7 +103,7 @@ function PriceRange({ minPrice, maxPrice, onChange }) {
             type="number"
             min={0}
             value={minPrice}
-            onChange={(e) => onChange({ minPrice: Number(e.target.value), maxPrice })}
+            onChange={(e) => onChange({ minPrice: e.target.value === '' ? '' : Number(e.target.value), maxPrice })}
             placeholder="Min"
             aria-label="Minimum price"
             className="w-full h-9 pl-6 pr-2 rounded-lg border border-forest/15 bg-white text-sm text-charcoal focus:outline-none focus:border-leaf focus:ring-1 focus:ring-leaf/20 transition-all"
@@ -111,7 +118,7 @@ function PriceRange({ minPrice, maxPrice, onChange }) {
             type="number"
             min={0}
             value={maxPrice}
-            onChange={(e) => onChange({ minPrice, maxPrice: Number(e.target.value) })}
+            onChange={(e) => onChange({ minPrice, maxPrice: e.target.value === '' ? '' : Number(e.target.value) })}
             placeholder="Max"
             aria-label="Maximum price"
             className="w-full h-9 pl-6 pr-2 rounded-lg border border-forest/15 bg-white text-sm text-charcoal focus:outline-none focus:border-leaf focus:ring-1 focus:ring-leaf/20 transition-all"
@@ -130,7 +137,7 @@ function FilterContent({ filters, categories, productCounts, onChange, onClearAl
         <button
           type="button"
           onClick={onClearAll}
-          className="text-xs text-charcoal/50 hover:text-charcoal transition-colors cursor-pointer underline underline-offset-2"
+          className="text-xs text-charcoal/50 hover:text-charcoal transition-colors cursor-pointer underline underline-offset-2 btn-minor px-1.5 py-0.5 rounded"
         >
           Clear all
         </button>
@@ -165,12 +172,18 @@ export default function FilterPanel({
   filters,
   categories,
   productCounts,
-  onChange,
+  onApply,
   onClearAll,
   mobileOpen,
   onMobileClose,
 }) {
+  const [draft, setDraft] = useState(filters)
   const drawerRef = useRef(null)
+
+  // Keep draft in sync if applied filters change from outside (e.g. chips, navigation)
+  useEffect(() => {
+    setDraft(filters)
+  }, [filters])
 
   // Esc closes mobile drawer
   useEffect(() => {
@@ -190,20 +203,49 @@ export default function FilterPanel({
     return () => { document.body.style.overflow = orig }
   }, [mobileOpen])
 
+  const handleApply = () => {
+    onApply(draft)
+  }
+
+  const handleClear = () => {
+    setDraft(DEFAULT_FILTERS)
+    onClearAll()
+  }
+
   return (
     <>
-      {/* Desktop: sticky left column with independent scroll */}
+      {/* Desktop: sticky column with scrolling filters and sticky Apply/Clear buttons */}
       <aside
-        className="hidden lg:block w-[260px] shrink-0 sticky top-[96px] self-start max-h-[calc(100vh-112px)] overflow-y-auto [scrollbar-width:thin] bg-white border border-forest/10 rounded-2xl p-5 pb-8 shadow-xs"
+        className="hidden lg:flex flex-col w-[260px] shrink-0 sticky top-[96px] self-start max-h-[calc(100vh-112px)] bg-white border border-forest/10 rounded-2xl p-5 shadow-xs overflow-hidden"
         aria-label="Filters"
       >
-        <FilterContent
-          filters={filters}
-          categories={categories}
-          productCounts={productCounts}
-          onChange={onChange}
-          onClearAll={onClearAll}
-        />
+        <div className="flex-1 overflow-y-auto [scrollbar-width:thin] pr-1 pb-2">
+          <FilterContent
+            filters={draft}
+            categories={categories}
+            productCounts={productCounts}
+            onChange={setDraft}
+            onClearAll={handleClear}
+          />
+        </div>
+
+        {/* Sticky Apply and Clear buttons at the bottom of the panel */}
+        <div className="pt-4 border-t border-forest/10 space-y-2 shrink-0 bg-white">
+          <button
+            type="button"
+            onClick={handleApply}
+            className="w-full py-2.5 rounded-xl bg-forest text-cream text-sm font-semibold btn-major cursor-pointer"
+          >
+            Apply filters
+          </button>
+          <button
+            type="button"
+            onClick={handleClear}
+            className="w-full py-2.5 rounded-xl border-2 border-[var(--walnut)] text-[var(--walnut)] hover:bg-[var(--walnut)] hover:text-[var(--cream)] text-sm font-semibold btn-major cursor-pointer transition-colors"
+          >
+            Clear filters
+          </button>
+        </div>
       </aside>
 
       {/* Mobile: backdrop + drawer */}
@@ -230,32 +272,43 @@ export default function FilterPanel({
             type="button"
             onClick={onMobileClose}
             aria-label="Close filters"
-            className="w-9 h-9 rounded-full flex items-center justify-center text-charcoal/60 hover:text-charcoal hover:bg-forest/5 transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-charcoal/60 hover:text-charcoal hover:bg-forest/5 transition-colors cursor-pointer btn-minor"
           >
             <X size={18} aria-hidden="true" />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-5">
           <FilterContent
-            filters={filters}
+            filters={draft}
             categories={categories}
             productCounts={productCounts}
-            onChange={onChange}
-            onClearAll={onClearAll}
+            onChange={setDraft}
+            onClearAll={handleClear}
           />
         </div>
-        <div className="p-4 border-t border-forest/10 shrink-0">
+        <div className="p-4 border-t border-forest/10 space-y-2 shrink-0 bg-white">
           <button
             type="button"
-            onClick={onMobileClose}
-            className="w-full py-2.5 rounded-xl bg-forest text-cream text-sm font-semibold cursor-pointer hover:bg-forest/90 transition-colors"
+            onClick={() => {
+              handleApply()
+              onMobileClose()
+            }}
+            className="w-full py-2.5 rounded-xl bg-forest text-cream text-sm font-semibold btn-major cursor-pointer"
           >
-            Show results
+            Apply filters
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              handleClear()
+              onMobileClose()
+            }}
+            className="w-full py-2.5 rounded-xl border-2 border-[var(--walnut)] text-[var(--walnut)] hover:bg-[var(--walnut)] hover:text-[var(--cream)] text-sm font-semibold btn-major cursor-pointer transition-colors"
+          >
+            Clear filters
           </button>
         </div>
       </aside>
-
-      {/* Mobile trigger button — rendered in Shop, but exported for convenience */}
     </>
   )
 }
@@ -265,7 +318,7 @@ export function FilterButton({ onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="lg:hidden flex items-center gap-2 h-9 px-4 rounded-xl border border-forest/20 bg-white text-sm font-medium text-forest hover:border-forest/40 transition-colors cursor-pointer shadow-xs"
+      className="lg:hidden flex items-center gap-2 h-9 px-4 rounded-xl border border-forest/20 bg-white text-sm font-medium text-forest hover:border-forest/40 transition-colors cursor-pointer shadow-xs btn-minor"
     >
       <SlidersHorizontal size={15} aria-hidden="true" />
       Filters

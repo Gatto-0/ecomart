@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { X, Home, ShoppingBag, BookOpen, HelpCircle } from 'lucide-react'
+import Logo from './Logo'
 
 const navLinks = [
   { to: '/', label: 'Home', icon: Home, end: true },
@@ -72,20 +73,14 @@ export default function SideDrawer({ isOpen, onClose, menuButtonRef }) {
       >
         {/* Top: Logo & Close Button */}
         <div className="flex items-center justify-between px-6 h-20 border-b border-cream/10 shrink-0">
-          <Link
-            to="/"
-            onClick={onClose}
-            className="font-heading font-semibold text-2xl tracking-tight text-cream hover:text-leaf transition-colors"
-          >
-            EcoMart
-          </Link>
+          <Logo onClick={onClose} />
 
           <button
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="w-10 h-10 rounded-full flex items-center justify-center text-cream/80 hover:text-cream hover:bg-cream/10 transition-colors cursor-pointer"
+            className="w-10 h-10 rounded-full flex items-center justify-center text-cream/80 hover:text-cream btn-minor transition-colors cursor-pointer"
           >
             <X size={20} aria-hidden="true" />
           </button>

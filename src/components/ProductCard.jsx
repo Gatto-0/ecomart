@@ -71,7 +71,7 @@ export default function ProductCard({ product }) {
   const categoryName = categoryData?.name ?? product.category
 
   return (
-    <article className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-xs border border-forest/10 hover:shadow-sm hover:border-forest/20 transition-all duration-200">
+    <article className="group flex flex-col bg-white rounded-2xl rounded-l-none border-l-4 border-l-forest overflow-hidden shadow-xs border-y border-r border-forest/10 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
       {/* Photo */}
       <div className="relative aspect-square overflow-hidden bg-forest/5">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
@@ -88,7 +88,7 @@ export default function ProductCard({ product }) {
           type="button"
           onClick={() => toggle(product.slug)}
           aria-label={inWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-          className={`absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all cursor-pointer ${
+          className={`absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all cursor-pointer btn-minor ${
             inWishlist
               ? 'bg-forest text-cream'
               : 'bg-white/90 text-forest/60 hover:text-forest hover:bg-white'
@@ -122,12 +122,26 @@ export default function ProductCard({ product }) {
           {formatPrice(product.price)}
         </p>
 
-        {/* Vague claim chip */}
-        {isVagueClaim && (
-          <span className="inline-flex self-start items-center px-2 py-0.5 rounded-full bg-clay/15 text-clay text-[11px] font-medium leading-tight border border-clay/20">
-            Unverified claim
-          </span>
-        )}
+        {/* Text holder chips with tinted backgrounds */}
+        <div className="flex flex-wrap gap-1.5 pt-0.5">
+          {product.total >= 9 && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#F6E3B8] text-[#5A3D12] text-[11px] font-medium leading-tight">
+              Top eco pick
+            </span>
+          )}
+
+          {product.tags?.includes('plastic-free') && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#E4EBDD] text-[#2F4A35] text-[11px] font-medium leading-tight">
+              Plastic-free
+            </span>
+          )}
+
+          {isVagueClaim && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#F3D5C8] text-[#6E2F1B] text-[11px] font-medium leading-tight border border-[#C4694A]/25">
+              Unverified claim
+            </span>
+          )}
+        </div>
 
         {/* Greener swap link */}
         {swap && (
@@ -158,7 +172,7 @@ export default function ProductCard({ product }) {
         <button
           type="button"
           onClick={handleAddToCart}
-          className={`mt-1 w-full py-2 sm:py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
+          className={`mt-1 w-full py-2 sm:py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer btn-major ${
             added
               ? 'bg-leaf text-cream'
               : 'bg-forest text-cream hover:bg-forest/90 active:scale-[0.98]'

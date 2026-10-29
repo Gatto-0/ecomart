@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Heart, ShoppingBag } from 'lucide-react'
+import { Heart, ShoppingBag, Trash2 } from 'lucide-react'
 import { useWishlist } from '../context/WishlistContext'
 import { getProduct } from '../data/products'
 import ProductCard from '../components/ProductCard'
@@ -21,7 +21,7 @@ export default function Wishlist() {
         </p>
         <Link
           to="/shop"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors"
+          className="btn-major inline-flex items-center gap-2 px-6 py-3 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 transition-colors"
         >
           <ShoppingBag size={16} aria-hidden="true" />
           Browse the shop
@@ -41,8 +41,9 @@ export default function Wishlist() {
           onClick={() => {
             ;[...slugs].forEach((s) => toggle(s))
           }}
-          className="text-sm text-charcoal/60 hover:text-clay underline underline-offset-2 transition-colors cursor-pointer"
+          className="btn-major inline-flex items-center gap-2 text-[16px] px-[22px] py-[12px] rounded-[10px] border-2 border-[var(--walnut)] text-[var(--walnut)] hover:bg-[var(--walnut)] hover:text-[var(--cream)] font-medium cursor-pointer"
         >
+          <Trash2 size={18} aria-hidden="true" />
           Clear wishlist
         </button>
       </div>

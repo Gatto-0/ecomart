@@ -224,7 +224,7 @@ export default function Checkout() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3.5 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            className="w-full py-3.5 rounded-full bg-forest text-cream font-semibold text-sm hover:bg-forest/90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer btn-major"
           >
             {submitting ? 'Placing order…' : 'Place order'}
           </button>

@@ -56,7 +56,7 @@ export default function CompareBar() {
                   type="button"
                   onClick={() => remove(slug)}
                   aria-label={`Remove ${name} from compare`}
-                  className="hover:text-leaf transition-colors p-0.5 cursor-pointer rounded-full"
+                  className="hover:text-leaf transition-colors p-0.5 cursor-pointer rounded-full btn-minor"
                 >
                   <X size={13} aria-hidden="true" />
                 </button>
@@ -69,7 +69,7 @@ export default function CompareBar() {
           <button
             type="button"
             onClick={clear}
-            className="text-xs text-cream/70 hover:text-cream underline underline-offset-2 transition-colors cursor-pointer"
+            className="text-xs text-cream/70 hover:text-cream underline underline-offset-2 transition-colors cursor-pointer btn-minor px-2 py-1 rounded-full"
           >
             Clear
           </button>
@@ -78,7 +78,7 @@ export default function CompareBar() {
             type="button"
             disabled={!isReady}
             onClick={handleCompare}
-            className="px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer disabled:cursor-not-allowed disabled:bg-cream/20 disabled:text-cream/50 bg-leaf text-cream hover:bg-leaf/90 shadow-xs"
+            className="px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer disabled:cursor-not-allowed disabled:bg-cream/20 disabled:text-cream/50 bg-leaf text-cream hover:bg-leaf/90 shadow-xs btn-major"
           >
             Compare
           </button>
