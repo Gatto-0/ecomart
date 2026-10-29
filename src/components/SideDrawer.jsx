@@ -66,8 +66,8 @@ export default function SideDrawer({ isOpen, onClose, menuButtonRef }) {
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className={`fixed top-0 bottom-0 left-0 z-50 w-[300px] max-w-[85vw] h-full bg-forest text-cream flex flex-col shadow-2xl transition-transform duration-300 ease-in-out motion-reduce:transition-none ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 bottom-0 right-0 z-50 w-[300px] max-w-[85vw] h-full bg-forest text-cream flex flex-col shadow-2xl transition-transform duration-300 ease-in-out motion-reduce:transition-none ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Top: Logo & Close Button */}

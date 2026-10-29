@@ -34,10 +34,7 @@ export default function Learn() {
     <div className="min-h-screen bg-cream text-charcoal flex flex-col">
       <main className="flex-1 max-w-7xl mx-auto px-6 w-full">
         {/* Page Header */}
-        <div className="pt-8 sm:pt-12 pb-10 sm:pb-14">
-          <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-2 block">
-            Learn
-          </span>
+        <div className="pt-4 sm:pt-8 pb-10 sm:pb-14">
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold text-forest tracking-tight leading-[1.1] max-w-3xl mb-4">
             Small facts that change what's in your cart.
           </h1>
@@ -70,18 +67,18 @@ export default function Learn() {
 
             {/* Text right on desktop */}
             <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-xs uppercase tracking-wider font-semibold text-leaf">
-                  {featuredTopic.readTime}
-                </span>
-                <span className="text-xs uppercase tracking-wider font-semibold text-forest/50">
-                  Featured
-                </span>
-              </div>
-
               <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-forest leading-tight group-hover:text-leaf transition-colors mb-3">
                 {featuredTopic.hook}
               </h2>
+
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xs font-semibold text-leaf">
+                  {featuredTopic.readTime}
+                </span>
+                <span className="text-xs font-semibold text-forest/50">
+                  Featured
+                </span>
+              </div>
 
               <p className="text-base sm:text-lg text-charcoal/80 mb-6">
                 {featuredTopic.title}

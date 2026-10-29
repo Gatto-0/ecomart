@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
-import { Heart, ShoppingCart, User } from 'lucide-react'
+import { Heart, ShoppingCart, User, Menu } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 
-export default function UtilityCluster({ className = '' }) {
+export default function UtilityCluster({
+  className = '',
+  onOpenMenu,
+  menuButtonRef,
+}) {
   const { count: cartCount } = useCart()
   const { count: wishlistCount } = useWishlist()
 
@@ -47,6 +51,17 @@ export default function UtilityCluster({ className = '' }) {
       >
         <User size={18} aria-hidden="true" />
       </Link>
+
+      {/* Menu button: icon only, no text, aria-label "Open menu" */}
+      <button
+        ref={menuButtonRef}
+        type="button"
+        onClick={onOpenMenu}
+        aria-label="Open menu"
+        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
+      >
+        <Menu size={18} aria-hidden="true" />
+      </button>
     </div>
   )
 }

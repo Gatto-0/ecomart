@@ -56,25 +56,25 @@ export default function LearnModal({ topic, onClose }) {
           <X size={20} />
         </button>
 
-        {/* Photo on top with fallback */}
-        <div className="relative aspect-[16/9] w-full bg-[#CBD5C8] shrink-0 overflow-hidden">
+        {/* Photo on top with capped height and object-fit: cover */}
+        <div className="relative h-[120px] sm:h-[160px] w-full bg-[#CBD5C8] shrink-0 overflow-hidden">
           <LearnCardImage src={topic.image} alt={topic.title} />
         </div>
 
         {/* Scrollable body content */}
         <div className="p-6 sm:p-8 overflow-y-auto">
-          {/* Read Time */}
-          <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-2 block">
-            {topic.readTime}
-          </span>
-
           {/* Title */}
           <h2
             id="learn-modal-title"
-            className="font-heading text-2xl sm:text-3xl font-bold text-forest leading-tight mb-4"
+            className="font-heading text-2xl sm:text-3xl font-bold text-forest leading-tight mb-2"
           >
             {topic.title}
           </h2>
+
+          {/* Read Time below title */}
+          <span className="text-xs font-semibold text-leaf mb-4 block">
+            {topic.readTime}
+          </span>
 
           {/* Stat Box */}
           {topic.stat && (
@@ -88,8 +88,8 @@ export default function LearnModal({ topic, onClose }) {
             </div>
           )}
 
-          {/* Body Text */}
-          <p className="text-base sm:text-lg text-charcoal/90 leading-relaxed my-4">
+          {/* Body Text: line-height 1.6 and comfortable font size ~16px */}
+          <p className="text-base text-charcoal/90 leading-[1.6] my-4">
             {topic.body}
           </p>
 

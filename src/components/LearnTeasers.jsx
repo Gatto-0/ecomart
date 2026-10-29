@@ -1,40 +1,79 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { topics } from '../data/learn'
 
-function LearnCardImage({ src, alt }) {
-  const [hasError, setHasError] = useState(false)
-
-  if (hasError) {
-    return (
-      <div
-        className="w-full h-full bg-[#CBD5C8] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
-        aria-label={alt}
-      >
-        <svg
-          className="w-8 h-8 sm:w-10 sm:h-10 text-leaf/40"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-        </svg>
-      </div>
-    )
-  }
+function TeaserBox({ topic, index }) {
+  const [imageFailed, setImageFailed] = useState(false)
+  const isLeft = index % 2 === 0
+  const fallbackBg = isLeft ? '#E4EBDD' : '#F1E8D8'
 
   return (
-    <img
-      src={src}
-      alt={alt}
-      onError={() => setHasError(true)}
-      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-    />
+    <article
+      aria-label={topic.title}
+      style={{ backgroundColor: fallbackBg }}
+      className="group relative w-full rounded-2xl md:rounded-3xl overflow-hidden h-auto md:h-[360px] flex flex-col justify-center border border-forest/10 p-6 sm:p-8 md:p-12 transition-shadow hover:shadow-md"
+    >
+      {/* Background Image with Fallback */}
+      {topic.image && !imageFailed && (
+        <img
+          src={topic.image}
+          alt={topic.title}
+          onError={() => setImageFailed(true)}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
+        />
+      )}
+
+      {/* Gradient Overlay */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 pointer-events-none bg-[rgba(246,241,231,0.95)] ${
+          isLeft
+            ? 'md:bg-gradient-to-r md:from-[rgba(246,241,231,0.95)] md:via-[rgba(246,241,231,0.85)_50%] md:to-transparent'
+            : 'md:bg-gradient-to-l md:from-[rgba(246,241,231,0.95)] md:via-[rgba(246,241,231,0.85)_50%] md:to-transparent'
+        }`}
+      />
+
+      {/* Text Block Content */}
+      <div className={`relative z-10 flex w-full ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}>
+        <div className="w-full md:w-[45%] flex flex-col text-left">
+          {/* 1. Bold hook line in Fraunces, large */}
+          <h3 className="font-heading font-bold text-2xl sm:text-3xl md:text-[28px] lg:text-3xl text-forest tracking-tight leading-tight mb-4">
+            {topic.hook}
+          </h3>
+
+          {/* 2. Stat on one line: value in Fraunces, label beside in smaller size */}
+          {topic.stat && (
+            <div className="flex items-baseline gap-2.5 sm:gap-3 mb-6">
+              <span className="font-heading font-bold text-xl sm:text-2xl text-forest shrink-0">
+                {topic.stat.value}
+              </span>
+              <span className="text-xs sm:text-sm text-charcoal/85 leading-snug">
+                {topic.stat.label}
+              </span>
+            </div>
+          )}
+
+          {/* 3. Row with readTime and Learn more link with arrow icon */}
+          <div className="flex items-center gap-4 mt-auto">
+            <span className="text-xs font-medium text-charcoal/70">
+              {topic.readTime}
+            </span>
+            <Link
+              to={`/learn?topic=${topic.slug}`}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-leaf transition-colors group/link"
+            >
+              <span>Learn more</span>
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover/link:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -49,35 +88,9 @@ export default function LearnTeasers() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {teaserTopics.map((topic) => (
-          <Link
-            key={topic.slug}
-            to={`/learn?topic=${topic.slug}`}
-            className="group flex flex-col bg-cream rounded-2xl overflow-hidden border border-forest/10 hover:border-forest/30 transition-all hover:shadow-sm"
-          >
-            {/* Photo on top with fallback */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#CBD5C8]">
-              <LearnCardImage src={topic.image} alt={topic.title} />
-            </div>
-
-            {/* Card Content */}
-            <div className="p-5 sm:p-6 flex flex-col flex-1">
-              <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-2.5">
-                {topic.readTime}
-              </span>
-
-              <h3 className="font-heading font-bold text-forest text-lg sm:text-xl leading-snug group-hover:text-leaf transition-colors mb-4">
-                {topic.title}
-              </h3>
-
-              <div className="mt-auto pt-2">
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest group-hover:text-leaf transition-colors">
-                  Learn more <span aria-hidden="true">&rarr;</span>
-                </span>
-              </div>
-            </div>
-          </Link>
+      <div className="flex flex-col gap-6 sm:gap-8">
+        {teaserTopics.map((topic, index) => (
+          <TeaserBox key={topic.slug} topic={topic} index={index} />
         ))}
       </div>
 

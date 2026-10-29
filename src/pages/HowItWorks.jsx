@@ -15,12 +15,9 @@ export default function HowItWorks() {
 
   return (
     <div className="bg-cream text-charcoal min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 pt-10 sm:pt-16 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
+      <div className="max-w-7xl mx-auto px-6 pt-6 sm:pt-10 pb-16 sm:pb-24 space-y-16 sm:space-y-24">
         {/* Header */}
         <header className="max-w-4xl">
-          <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-3 block">
-            How it works
-          </span>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-bold text-forest tracking-tight leading-[1.15]">
             {MISSION}
           </h1>

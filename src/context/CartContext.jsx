@@ -61,6 +61,25 @@ export function CartProvider({ children }) {
     })
   }, [])
 
+  const replaceItem = useCallback((oldSlug, newSlug) => {
+    setItems((prev) => {
+      const existing = prev.find((i) => i.slug === oldSlug)
+      if (!existing) return prev
+      // If newSlug already in cart, merge quantities
+      const hasNew = prev.some((i) => i.slug === newSlug)
+      let next
+      if (hasNew) {
+        next = prev
+          .filter((i) => i.slug !== oldSlug)
+          .map((i) => (i.slug === newSlug ? { ...i, qty: i.qty + existing.qty } : i))
+      } else {
+        next = prev.map((i) => (i.slug === oldSlug ? { slug: newSlug, qty: i.qty } : i))
+      }
+      saveToStorage(next)
+      return next
+    })
+  }, [])
+
   const clear = useCallback(() => {
     updateItems([])
   }, [updateItems])
@@ -73,7 +92,7 @@ export function CartProvider({ children }) {
   }, 0)
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, setQty, clear, count, subtotal }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, setQty, replaceItem, clear, count, subtotal }}>
       {children}
     </CartContext.Provider>
   )

@@ -3,7 +3,7 @@ import { marqueePhrases } from '../data/landing'
 function LeafIcon() {
   return (
     <svg
-      className="w-4 h-4 text-leaf shrink-0 mx-6"
+      className="marquee-leaf w-4 h-4 shrink-0 mx-6"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -18,13 +18,31 @@ function LeafIcon() {
   )
 }
 
-export default function Marquee() {
-  // Duplicate arrays to create a seamless infinite loop
-  const items = [...marqueePhrases, ...marqueePhrases, ...marqueePhrases, ...marqueePhrases]
+// Stable items array outside component so re-renders never restart the animation
+const MARQUEE_ITEMS = [
+  ...marqueePhrases,
+  ...marqueePhrases,
+  ...marqueePhrases,
+  ...marqueePhrases,
+]
 
+export default function Marquee() {
   return (
-    <div className="w-full bg-forest text-cream py-4 overflow-hidden select-none">
+    <div className="marquee-wrapper w-full py-4 overflow-hidden select-none">
       <style>{`
+        .marquee-wrapper {
+          --oak: #6F4E32;
+          --cream: #FBF3E4;
+          --leaf-brown: #B59B5A;
+          background-color: var(--oak);
+          color: var(--cream);
+        }
+        .marquee-text {
+          color: var(--cream);
+        }
+        .marquee-leaf {
+          color: var(--leaf-brown);
+        }
         @keyframes marqueeScroll {
           0% {
             transform: translateX(0%);
@@ -38,7 +56,10 @@ export default function Marquee() {
           width: max-content;
           animation: marqueeScroll 38s linear infinite;
         }
-        .marquee-track:hover {
+        .marquee-wrapper:hover .marquee-track,
+        .marquee-wrapper:focus-within .marquee-track,
+        .marquee-track:hover,
+        .marquee-track:focus-within {
           animation-play-state: paused;
         }
         @media (prefers-reduced-motion: reduce) {
@@ -51,9 +72,9 @@ export default function Marquee() {
         }
       `}</style>
       <div className="marquee-track items-center">
-        {items.map((phrase, index) => (
+        {MARQUEE_ITEMS.map((phrase, index) => (
           <div key={index} className="flex items-center shrink-0">
-            <span className="text-sm sm:text-base font-medium tracking-wide text-cream whitespace-nowrap">
+            <span className="marquee-text text-sm sm:text-base font-medium tracking-wide whitespace-nowrap">
               {phrase}
             </span>
             <LeafIcon />
@@ -63,4 +84,3 @@ export default function Marquee() {
     </div>
   )
 }
-

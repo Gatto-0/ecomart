@@ -4,6 +4,7 @@ import { Heart } from 'lucide-react'
 import EcoScoreBadge from './EcoScoreBadge'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
+import { useCompare } from '../context/CompareContext'
 import { getSwap, categories } from '../data/products'
 
 function formatPrice(price) {
@@ -51,8 +52,11 @@ function ProductImage({ product }) {
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
   const { toggle, has } = useWishlist()
+  const { toggle: toggleCompare, has: isCompared, count: compareCount } = useCompare()
   const [added, setAdded] = useState(false)
   const inWishlist = has(product.slug)
+  const compared = isCompared(product.slug)
+  const compareDisabled = !compared && compareCount >= 2
 
   const swap = product.total < 5 ? getSwap(product) : null
   const isVagueClaim = product.tags?.includes('vague-claim')
@@ -137,6 +141,18 @@ export default function ProductCard({ product }) {
 
         {/* Spacer */}
         <div className="flex-1" />
+
+        {/* Compare checkbox */}
+        <label className="flex items-center gap-1.5 text-xs text-charcoal/70 cursor-pointer select-none pt-1">
+          <input
+            type="checkbox"
+            checked={compared}
+            disabled={compareDisabled}
+            onChange={() => toggleCompare(product.slug)}
+            className="accent-forest w-3.5 h-3.5 rounded cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+          />
+          <span className={compareDisabled ? 'text-charcoal/40' : ''}>Compare</span>
+        </label>
 
         {/* Add to cart */}
         <button

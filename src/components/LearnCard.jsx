@@ -57,13 +57,13 @@ export default function LearnCard({ topic, onSelect }) {
 
       {/* Content */}
       <div className="p-5 sm:p-6 flex flex-col flex-1">
-        <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-2.5">
-          {topic.readTime}
-        </span>
-
         <h3 className="font-heading font-bold text-forest text-lg sm:text-xl leading-snug group-hover:text-leaf transition-colors mb-2">
           {topic.hook}
         </h3>
+
+        <span className="text-xs font-semibold text-leaf mb-2.5">
+          {topic.readTime}
+        </span>
 
         <p className="text-sm text-charcoal/80 mt-auto pt-2">
           {topic.title}

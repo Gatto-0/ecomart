@@ -192,20 +192,18 @@ export default function FilterPanel({
 
   return (
     <>
-      {/* Desktop: sticky left column */}
+      {/* Desktop: sticky left column with independent scroll */}
       <aside
-        className="hidden lg:block w-[260px] shrink-0 sticky top-24 self-start h-fit"
+        className="hidden lg:block w-[260px] shrink-0 sticky top-[96px] self-start max-h-[calc(100vh-112px)] overflow-y-auto [scrollbar-width:thin] bg-white border border-forest/10 rounded-2xl p-5 pb-8 shadow-xs"
         aria-label="Filters"
       >
-        <div className="bg-white border border-forest/10 rounded-2xl p-5 shadow-xs">
-          <FilterContent
-            filters={filters}
-            categories={categories}
-            productCounts={productCounts}
-            onChange={onChange}
-            onClearAll={onClearAll}
-          />
-        </div>
+        <FilterContent
+          filters={filters}
+          categories={categories}
+          productCounts={productCounts}
+          onChange={onChange}
+          onClearAll={onClearAll}
+        />
       </aside>
 
       {/* Mobile: backdrop + drawer */}
