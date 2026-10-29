@@ -47,36 +47,8 @@ export const categories = [
   },
 ]
 
-export const learnTopics = [
-  {
-    title: 'Our carbon footprint, in everyday terms',
-    slug: 'carbon-footprint',
-    image: '/images/learn/carbon-footprint.jpg',
-    readTime: '2 min read',
-  },
-  {
-    title: 'Why plastic matters',
-    slug: 'why-plastic-matters',
-    image: '/images/learn/why-plastic-matters.jpg',
-    readTime: '2 min read',
-  },
-  {
-    title: 'What a small switch can save',
-    slug: 'what-a-small-switch-can-save',
-    image: '/images/learn/what-a-small-switch-can-save.jpg',
-    readTime: '2 min read',
-  },
-  {
-    title: 'Why "eco-friendly" labels can mislead (greenwashing)',
-    slug: 'greenwashing',
-    image: '/images/learn/greenwashing.jpg',
-    readTime: '2 min read',
-  },
-]
-
 export default {
   marqueePhrases,
   typewriterPhrases,
   categories,
-  learnTopics,
 }

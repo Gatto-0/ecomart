@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { learnTopics } from '../data/landing'
+import { topics } from '../data/learn'
 
 function LearnCardImage({ src, alt }) {
   const [hasError, setHasError] = useState(false)
@@ -39,6 +39,8 @@ function LearnCardImage({ src, alt }) {
 }
 
 export default function LearnTeasers() {
+  const teaserTopics = topics.slice(0, 4)
+
   return (
     <section className="py-20 sm:py-28 px-6 max-w-7xl mx-auto w-full border-t border-forest/10">
       <div className="flex flex-col items-start mb-8 sm:mb-12">
@@ -48,9 +50,10 @@ export default function LearnTeasers() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {learnTopics.map((topic) => (
-          <article
+        {teaserTopics.map((topic) => (
+          <Link
             key={topic.slug}
+            to={`/learn?topic=${topic.slug}`}
             className="group flex flex-col bg-cream rounded-2xl overflow-hidden border border-forest/10 hover:border-forest/30 transition-all hover:shadow-sm"
           >
             {/* Photo on top with fallback */}
@@ -69,15 +72,12 @@ export default function LearnTeasers() {
               </h3>
 
               <div className="mt-auto pt-2">
-                <Link
-                  to="/learn"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-leaf transition-colors"
-                >
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest group-hover:text-leaf transition-colors">
                   Learn more <span aria-hidden="true">&rarr;</span>
-                </Link>
+                </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 
@@ -93,4 +93,3 @@ export default function LearnTeasers() {
     </section>
   )
 }
-
