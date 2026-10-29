@@ -11,21 +11,24 @@ const iconMap = {
 
 export default function EcoScoreSection() {
   return (
-    <section aria-labelledby="eco-score-heading" className="w-full">
-      <div className="mb-6">
-        <h2
-          id="eco-score-heading"
-          className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-forest tracking-tight mb-2"
-        >
-          How the eco score works
-        </h2>
-        <p className="text-base sm:text-lg text-charcoal/80">
-          Every product is scored out of 10 across five questions.
-        </p>
-      </div>
+    <section aria-labelledby="eco-score-heading" className="eco-score-band w-full">
+      <span className="eco-score-glow eco-score-glow--marigold" aria-hidden="true" />
+      <span className="eco-score-glow eco-score-glow--terracotta" aria-hidden="true" />
+      <div className="eco-score-content">
+        <div className="eco-score-heading mb-6">
+          <h2
+            id="eco-score-heading"
+            className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight mb-2"
+          >
+            How the eco score works
+          </h2>
+          <p className="text-base sm:text-lg text-sage">
+            Every product is scored out of 10 across five questions.
+          </p>
+        </div>
 
       {/* Scale bar */}
-      <div className="bg-white/70 border border-forest/10 rounded-2xl p-5 sm:p-6 mb-10 shadow-xs">
+      <div className="eco-score-summary border border-forest/10 rounded-2xl p-5 sm:p-6 mb-10 shadow-xs">
         <div className="flex w-full h-3 sm:h-3.5 rounded-full overflow-hidden mb-4 bg-forest/5">
           {bands.map((band) => {
             const count = band.max - band.min + 1
@@ -52,11 +55,11 @@ export default function EcoScoreSection() {
                   style={{ backgroundColor: band.color }}
                   aria-hidden="true"
                 />
-                <span className="font-heading font-semibold text-sm text-forest">
+                <span className="eco-score-summary-heading font-heading font-semibold text-sm">
                   {band.label}
                 </span>
               </div>
-              <span className="text-xs text-charcoal/70 pl-5">
+              <span className="eco-score-summary-range text-xs pl-5">
                 {band.min}–{band.max} points
               </span>
             </div>
@@ -71,31 +74,31 @@ export default function EcoScoreSection() {
           return (
             <div
               key={criterion.key}
-              className="bg-white/80 border border-forest/10 rounded-2xl p-6 flex flex-col shadow-xs hover:border-forest/20 transition-all duration-200"
+              className="eco-score-card flex flex-col"
             >
-              <div className="w-10 h-10 rounded-xl bg-forest/5 text-forest flex items-center justify-center mb-4 shrink-0">
+              <div className="eco-score-icon flex items-center justify-center mb-4 shrink-0">
                 <Icon size={20} strokeWidth={2} aria-hidden="true" />
               </div>
 
-              <h3 className="font-heading text-lg font-semibold text-forest mb-1">
+              <h3 className="font-heading text-[28px] font-semibold mb-1">
                 {criterion.name}
               </h3>
-              <p className="text-sm text-charcoal/80 mb-5 leading-snug">
+              <p className="text-[17px] mb-5 leading-snug">
                 {criterion.question}
               </p>
 
               {/* 3-row scoring list */}
-              <div className="border-t border-forest/10 pt-4 mt-auto">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-charcoal/50 mb-2 block">
+              <div className="eco-score-list pt-4 mt-auto">
+                <span className="text-[14px] font-semibold uppercase tracking-[0.08em] mb-2 block">
                   Scoring
                 </span>
-                <ul className="space-y-2 text-xs">
+                <ul className="space-y-2 text-base">
                   {criterion.levels.map((level, points) => (
                     <li key={points} className="flex items-start gap-2">
-                      <span className="shrink-0 font-medium text-forest bg-forest/5 rounded px-1.5 py-0.5 text-[11px]">
+                      <span className={`eco-score-pill eco-score-pill--${points} shrink-0 font-medium`}>
                         {points} {points === 1 ? 'pt' : 'pts'}
                       </span>
-                      <span className="text-charcoal/80 leading-tight pt-0.5">
+                      <span className="eco-score-description leading-tight pt-0.5">
                         {level}
                       </span>
                     </li>
@@ -107,10 +110,11 @@ export default function EcoScoreSection() {
         })}
       </div>
 
-      {/* Small muted disclaimer text */}
-      <p className="text-xs text-charcoal/60 mt-6 leading-relaxed max-w-3xl">
-        {DISCLAIMER}
-      </p>
+        {/* Small muted disclaimer text */}
+        <p className="text-xs text-sage mt-6 leading-relaxed max-w-3xl">
+          {DISCLAIMER}
+        </p>
+      </div>
     </section>
   )
 }

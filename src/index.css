@@ -37,10 +37,166 @@
   --walnut: #7A5638;
   --marigold: #E3A63B;
   --terracotta: #C4694A;
+  --teal: #1F4A4F;
   --sand: #A07B52;
   --leaf: #5E8C4A;
   --oak: #6F4E32;
   --leaf-brown: #B59B5A;
+}
+
+.eco-score-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 80px 40px;
+  border-radius: 24px;
+  background: var(--teal);
+}
+
+.eco-score-content {
+  position: relative;
+  z-index: 1;
+}
+
+.eco-score-glow {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.eco-score-glow--marigold {
+  width: 280px;
+  height: 280px;
+  top: -100px;
+  right: 8%;
+  background: var(--marigold);
+}
+
+.eco-score-glow--terracotta {
+  width: 220px;
+  height: 220px;
+  bottom: 2%;
+  left: -60px;
+  background: var(--terracotta);
+}
+
+.eco-score-heading h2 {
+  color: var(--cream);
+}
+
+.eco-score-heading h2::after {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 48px;
+  margin-top: 16px;
+  background: var(--marigold);
+}
+
+.eco-score-heading p {
+  color: var(--sage);
+}
+
+.eco-score-summary {
+  background: #E6EFEC;
+  border-color: rgba(31, 74, 79, 0.1);
+}
+
+.eco-score-summary .bg-forest\/5 {
+  background-color: rgba(31, 74, 79, 0.05);
+}
+
+.eco-score-summary-heading {
+  color: var(--teal);
+}
+
+.eco-score-summary-range {
+  color: #35595D;
+}
+
+.eco-score-card {
+  padding: 28px;
+  color: var(--cream);
+  background: rgba(251, 243, 228, 0.14);
+  border: 1px solid rgba(251, 243, 228, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(13, 28, 17, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.eco-score-card:hover {
+  transform: translateY(-4px);
+  background: rgba(251, 243, 228, 0.2);
+}
+
+@supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .eco-score-card,
+  .eco-score-card:hover {
+    background: rgba(31, 74, 79, 0.85);
+  }
+}
+
+.eco-score-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--forest);
+  background: var(--marigold);
+  border-radius: 12px;
+}
+
+.eco-score-card h3 {
+  color: var(--cream);
+}
+
+.eco-score-card > p,
+.eco-score-description {
+  color: var(--cream);
+}
+
+.eco-score-list {
+  border-top: 1px solid rgba(251, 243, 228, 0.3);
+}
+
+.eco-score-list > span {
+  color: var(--sage);
+}
+
+.eco-score-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.eco-score-pill--0 {
+  color: #6E2F1B;
+  background: #F3D5C8;
+}
+
+.eco-score-pill--1 {
+  color: #5A3D12;
+  background: #F6E3B8;
+}
+
+.eco-score-pill--2 {
+  color: #1F4A2A;
+  background: #C9E4B8;
+}
+
+@media (max-width: 767px) {
+  .eco-score-band {
+    padding: 56px 20px;
+  }
 }
 
 @layer base {
