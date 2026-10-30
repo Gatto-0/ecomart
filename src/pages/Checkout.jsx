@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext'
 import { getProduct } from '../data/products'
 import ImpactSummary from '../components/ImpactSummary'
 import { cartImpact } from '../lib/impact'
+import { useAuth } from '../context/AuthContext'
 
 function fmt(price) {
   return '₹' + price.toLocaleString('en-IN')
@@ -64,8 +65,9 @@ function Field({ label, id, type = 'text', value, onChange, error, ...rest }) {
 
 export default function Checkout() {
   const { items, subtotal, clear } = useCart()
+  const { user } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState(EMPTY_FORM)
+  const [form, setForm] = useState(() => ({ ...EMPTY_FORM, name: user?.name ?? '' }))
   const [errors, setErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
 

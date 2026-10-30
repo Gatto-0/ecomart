@@ -15,6 +15,10 @@ function ProductImage({ product }) {
   const [src, setSrc] = useState(product.image)
   const categoryData = categories.find((c) => c.slug === product.category)
   const fallback1 = categoryData?.image ?? null
+  const imageAlt =
+    src === fallback1 && categoryData
+      ? categoryData.imageAlt || `${categoryData.name} category image`
+      : product.name
 
   const handleError = () => {
     if (src === product.image && fallback1 && src !== fallback1) {
@@ -41,7 +45,7 @@ function ProductImage({ product }) {
   return (
     <img
       src={src}
-      alt={product.name}
+      alt={imageAlt}
       onError={handleError}
       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:group-hover:scale-100"
       loading="lazy"

@@ -8,7 +8,8 @@ export const topics = [
     title: "Our carbon footprint, in everyday terms",
     hook: "Every product has a footprint before it reaches you.",
     readTime: "2 min read",
-    image: "/images/learn/carbon-footprint.jpg",
+    image: "/images/learn/footprint.jpg",
+    imageAlt: "Carbon footprint comparison showing CO₂ per person in India and the world average",
     stat: {
       value: "~3 vs ~6.5",
       label:
@@ -31,7 +32,8 @@ export const topics = [
     title: "Why plastic matters",
     hook: "Only about 9% of all plastic ever made has been recycled.",
     readTime: "2 min read",
-    image: "/images/learn/why-plastic-matters.jpg",
+    image: "/images/learn/9 percent plastic.jpg",
+    imageAlt: "Only about nine percent of plastic is recycled",
     stat: {
       value: "9%",
       label: "of all plastic ever produced has been recycled",
@@ -52,7 +54,8 @@ export const topics = [
     title: "What a small switch can save",
     hook: "One bulb. At least 75% less energy.",
     readTime: "2 min read",
-    image: "/images/learn/small-switch.jpg",
+    image: "/images/learn/bulb.jpg",
+    imageAlt: "LED light bulb representing lower energy use",
     stat: {
       value: "75%",
       label:
@@ -74,7 +77,8 @@ export const topics = [
     title: "Why “eco-friendly” labels can mislead",
     hook: "Green words are cheap. Proof isn’t.",
     readTime: "2 min read",
-    image: "/images/learn/greenwashing.jpg",
+    image: "/images/learn/deceptive green claims.jpg",
+    imageAlt: "Misleading eco-friendly label on a product",
     stat: {
       value: "42%",
       label:
@@ -97,7 +101,8 @@ export const topics = [
     title: "The footprint on your plate",
     hook: "A fifth of the food we buy never gets eaten.",
     readTime: "2 min read",
-    image: "/images/learn/food-waste.jpg",
+    image: "/images/learn/a fifth of food we buy.jpg",
+    imageAlt: "Food waste: one fifth of purchased food goes uneaten",
     stat: {
       value: "1.05 billion",
       label:
@@ -119,7 +124,8 @@ export const topics = [
     title: "The hidden water in your wardrobe",
     hook: "How much water is in one shirt? Nobody agrees.",
     readTime: "2 min read",
-    image: "/images/learn/wardrobe-water.jpg",
+    image: "/images/learn/water in shirts.jpg",
+    imageAlt: "Glass T-shirt made of water",
     stat: {
       value: "600–7,000",
       label:
@@ -142,7 +148,8 @@ export const topics = [
     title: "How ecosystems depend on each other",
     hook: "About a million species face extinction.",
     readTime: "2 min read",
-    image: "/images/learn/ecosystems.jpg",
+    image: "/images/learn/extinction.jpg",
+    imageAlt: "Wildlife affected by biodiversity loss and extinction",
     stat: {
       value: "1 million",
       label: "animal and plant species threatened with extinction",
@@ -163,7 +170,8 @@ export const topics = [
     title: "Reuse beats recycle",
     hook: "Recycling is the last resort, not the first.",
     readTime: "2 min read",
-    image: "/images/learn/reuse-first.jpg",
+    image: "/images/learn/reuse over recycle.jpg",
+    imageAlt: "Reuse as a better choice before recycling",
     stat: {
       value: "30%",
       label:

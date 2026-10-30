@@ -16,19 +16,19 @@ export const DATA_NOTE =
   "Sample products for demonstration. Scores and impact figures are illustrative estimates.";
 
 export const categories = [
-  { slug: "kitchen-dining", name: "Kitchen and Dining", blurb: "Reusable essentials for cooking, storing and eating." },
-  { slug: "personal-care", name: "Personal Care", blurb: "Bars, refills and reusables for your daily routine." },
-  { slug: "home-cleaning", name: "Home and Cleaning", blurb: "Cleaning without the plastic bottles." },
-  { slug: "fashion-accessories", name: "Fashion and Accessories", blurb: "Clothes and accessories made to last." },
-  { slug: "stationery-office", name: "Stationery and Office", blurb: "Notebooks, pens and desk things with less waste." },
-  { slug: "food-drinks", name: "Food and Drinks", blurb: "Pantry staples with greener packaging." },
+  { slug: "kitchen-dining", name: "Kitchen and Dining", blurb: "Reusable essentials for cooking, storing and eating.", image: "/images/categories/kitchen-dining.jpeg", imageAlt: "Eco-friendly kitchen and dining items" },
+  { slug: "personal-care", name: "Personal Care", blurb: "Bars, refills and reusables for your daily routine.", image: "/images/categories/personal-care.jpeg", imageAlt: "Lower-waste personal care products" },
+  { slug: "home-cleaning", name: "Home and Cleaning", blurb: "Cleaning without the plastic bottles.", image: "/images/categories/home-cleaning.jpeg", imageAlt: "Home cleaning products with less plastic" },
+  { slug: "fashion-accessories", name: "Fashion and Accessories", blurb: "Clothes and accessories made to last.", image: "/images/categories/fashion-accessories.jpeg", imageAlt: "Sustainable fashion and accessories" },
+  { slug: "stationery-office", name: "Stationery and Office", blurb: "Notebooks, pens and desk things with less waste.", image: "/images/categories/stationery-office.jpeg", imageAlt: "Lower-waste stationery and office supplies" },
+  { slug: "food-drinks", name: "Food and Drinks", blurb: "Pantry staples with greener packaging.", image: "/images/categories/food-drinks.jpeg", imageAlt: "Sustainably packaged food and drinks" },
   { slug: "baby-kids", name: "Baby and Kids", blurb: "Gentler picks for little ones." },
   { slug: "garden-outdoors", name: "Garden and Outdoors", blurb: "Grow, compost and enjoy the outdoors." },
   { slug: "bags-travel", name: "Bags and Travel", blurb: "Carry more, throw away less." },
   { slug: "energy-gadgets", name: "Energy and Gadgets", blurb: "Smarter power and longer-lasting tech." },
   { slug: "pet-care", name: "Pet Care", blurb: "Lower-impact things for your companions." },
   { slug: "wellness-gifts", name: "Wellness and Gifts", blurb: "Thoughtful gifts and calming essentials." },
-].map((c) => ({ ...c, image: `/images/categories/${c.slug}.jpg` }));
+].map((c) => ({ ...c, image: c.image ?? `/images/categories/${c.slug}.jpg` }));
 
 const slugify = (s) =>
   s

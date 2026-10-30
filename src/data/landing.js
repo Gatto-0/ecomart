@@ -1,3 +1,5 @@
+import { categories as productCategories } from './products'
+
 export const marqueePhrases = [
   'Plastic-free packaging',
   'Non-toxic ingredients',
@@ -14,38 +16,12 @@ export const typewriterPhrases = [
   'Buy better. Waste less.',
 ]
 
-export const categories = [
-  {
-    title: 'Kitchen and Dining',
-    slug: 'kitchen-dining',
-    image: '/images/categories/kitchen-dining.jpg',
-  },
-  {
-    title: 'Personal Care',
-    slug: 'personal-care',
-    image: '/images/categories/personal-care.jpg',
-  },
-  {
-    title: 'Home and Cleaning',
-    slug: 'home-cleaning',
-    image: '/images/categories/home-cleaning.jpg',
-  },
-  {
-    title: 'Fashion and Accessories',
-    slug: 'fashion-accessories',
-    image: '/images/categories/fashion-accessories.jpg',
-  },
-  {
-    title: 'Stationery and Office',
-    slug: 'stationery-office',
-    image: '/images/categories/stationery-office.jpg',
-  },
-  {
-    title: 'Food and Drinks',
-    slug: 'food-drinks',
-    image: '/images/categories/food-drinks.jpg',
-  },
-]
+export const categories = productCategories.slice(0, 6).map((category) => ({
+  title: category.name,
+  slug: category.slug,
+  image: category.image,
+  imageAlt: category.imageAlt,
+}))
 
 export default {
   marqueePhrases,

@@ -12,6 +12,25 @@ import OrderSuccess from './pages/OrderSuccess'
 import Compare from './pages/Compare'
 import Login from './pages/Login'
 import ProductDetail from './pages/ProductDetail'
+import { useAuth } from './context/AuthContext'
+import { useCart } from './context/CartContext'
+
+function CheckoutGuard() {
+  const { user } = useAuth()
+  const { items } = useCart()
+
+  if (items.length === 0) return <Navigate to="/cart" replace />
+  if (!user) {
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{ from: '/checkout', notice: 'Please log in to place your order.' }}
+      />
+    )
+  }
+  return <Checkout />
+}
 
 export default function App() {
   return (
@@ -26,7 +45,7 @@ export default function App() {
           <Route path="/about" element={<Navigate to="/how-it-works" replace />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<CheckoutGuard />} />
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/login" element={<Login />} />

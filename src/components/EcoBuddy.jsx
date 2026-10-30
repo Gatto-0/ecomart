@@ -17,6 +17,10 @@ function MiniImage({ product }) {
   const categoryData = categories.find((c) => c.slug === product.category)
   const fallback = categoryData?.image ?? null
   const [src, setSrc] = useState(product.image)
+  const imageAlt =
+    src === fallback && categoryData
+      ? categoryData.imageAlt || `${categoryData.name} category image`
+      : product.name
 
   const handleError = () => {
     if (src === product.image && fallback && src !== fallback) {
@@ -40,7 +44,7 @@ function MiniImage({ product }) {
   return (
     <img
       src={src}
-      alt={product.name}
+      alt={imageAlt}
       onError={handleError}
       className="w-11 h-11 rounded-lg object-cover shrink-0"
       loading="lazy"

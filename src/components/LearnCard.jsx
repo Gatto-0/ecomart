@@ -6,7 +6,7 @@ export function LearnCardImage({ src, alt }) {
   if (hasError) {
     return (
       <div
-        className="w-full h-full bg-[#CBD5C8] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
+        className="w-full h-full bg-[#E4EBDD] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
         aria-label={alt}
       >
         <svg
@@ -31,7 +31,7 @@ export function LearnCardImage({ src, alt }) {
       src={src}
       alt={alt}
       onError={() => setHasError(true)}
-      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
     />
   )
 }
@@ -51,8 +51,8 @@ export default function LearnCard({ topic, onSelect }) {
       className="group flex flex-col bg-cream rounded-2xl overflow-hidden border border-forest/10 hover:border-forest/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer text-left select-none"
     >
       {/* Photo on top with fallback */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#CBD5C8]">
-        <LearnCardImage src={topic.image} alt={topic.title} />
+      <div className="relative aspect-video w-full overflow-hidden bg-[#E4EBDD]">
+        <LearnCardImage src={topic.image} alt={topic.imageAlt || topic.title} />
       </div>
 
       {/* Content */}
@@ -65,7 +65,7 @@ export default function LearnCard({ topic, onSelect }) {
           {topic.readTime}
         </span>
 
-        <p className="text-sm text-charcoal/80 mt-auto pt-2">
+        <p className="text-base leading-[1.6] text-charcoal/80 mt-auto pt-2">
           {topic.title}
         </p>
       </div>

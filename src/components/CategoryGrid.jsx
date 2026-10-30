@@ -8,7 +8,7 @@ function CategoryCardImage({ src, alt }) {
   if (hasError) {
     return (
       <div
-        className="w-full h-full bg-[#CBD5C8] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
+        className="w-full h-full bg-[#E4EBDD] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
         aria-label={alt}
       >
         <svg
@@ -33,7 +33,7 @@ function CategoryCardImage({ src, alt }) {
       src={src}
       alt={alt}
       onError={() => setHasError(true)}
-      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
     />
   )
 }
@@ -56,7 +56,7 @@ export default function CategoryGrid() {
             <Link
               key={category.slug}
               to={`/shop?category=${category.slug}`}
-              className={`group relative overflow-hidden rounded-2xl rounded-l-none border-l-4 border-l-walnut block bg-[#CBD5C8] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
+              className={`group relative overflow-hidden rounded-2xl rounded-l-none border-l-4 border-l-walnut block bg-[#E4EBDD] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
                 isLarge
                   ? 'col-span-1 lg:col-span-2 h-56 sm:h-72 lg:h-80'
                   : 'col-span-1 lg:col-span-1 h-48 sm:h-60 lg:h-64'
@@ -65,12 +65,12 @@ export default function CategoryGrid() {
               {/* Photo with fallback */}
               <CategoryCardImage
                 src={category.image}
-                alt={category.title}
+                alt={category.imageAlt || `${category.title} category`}
               />
 
               {/* Dark gradient overlay */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/30 to-transparent pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-t from-[rgba(47,74,53,0.75)] to-transparent pointer-events-none"
                 aria-hidden="true"
               />
 
