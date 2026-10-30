@@ -123,11 +123,34 @@
   height: 80px; padding-block: 10px; background: transparent; color: var(--forest);
   border-bottom: 1px solid transparent; transition: height 250ms ease, padding 250ms ease,
   background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+  isolation: isolate;
+}
+.site-topbar::before {
+  content: ''; position: absolute; inset: 0 0 auto; height: 140px; z-index: -1;
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(to bottom, rgba(22, 28, 19, .65), transparent);
+  transition: opacity 250ms ease;
+}
+.site-topbar--on-hero::before { opacity: 1; }
+.site-topbar--on-hero .topbar-nav-link,
+.site-topbar--on-hero .site-logo { text-shadow: 0 1px 6px rgba(0, 0, 0, .35); }
+.site-topbar--on-hero .topbar-nav-link { color: var(--cream); }
+.site-topbar--on-hero .topbar-nav-link:hover,
+.site-topbar--on-hero .topbar-nav-link:focus-visible { background: var(--marigold); color: var(--ink); }
+.site-topbar--on-hero .topbar-nav-link:focus-visible { outline-color: var(--marigold); }
+.site-topbar--on-hero .site-logo-eco { color: var(--cream) !important; }
+.site-topbar--on-hero .site-logo-mart { color: var(--sand) !important; }
+.site-topbar--on-hero .site-logo svg { color: var(--leaf-light) !important; }
+.site-topbar--on-hero .utility-icon { color: var(--cream); }
+.site-topbar--on-hero .utility-icon:hover { background: transparent; color: var(--marigold); }
+.site-topbar--on-hero .account-badge {
+  color: var(--cream); background: transparent; border: 1px solid rgba(251, 243, 228, .75);
 }
 .site-topbar--scrolled {
   height: 60px; padding-block: 6px; background: var(--ink); color: var(--cream);
   border-bottom-color: #3A4434;
 }
+.site-topbar--scrolled::before { opacity: 0; }
 .site-logo { transition: transform 250ms ease; }
 .site-logo--scrolled { transform: scale(.9); transform-origin: left center; }
 .site-logo-eco { color: var(--forest); }
@@ -182,6 +205,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .cart-total { border-top: 2px solid var(--ink); }
 .hero-scroll-cue { opacity: 1; transition: opacity 250ms ease; }
 .hero-scroll-cue--hidden { opacity: 0; animation-play-state: paused !important; }
+.hero-headline {
+  color: #fff; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+}
+.hero-accent {
+  color: var(--marigold); text-decoration: underline; text-decoration-color: var(--rust);
+  text-decoration-thickness: .12em; text-underline-offset: .12em; text-decoration-skip-ink: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .site-topbar, .site-logo, .topbar-nav-link, .btn-major, .btn-minor, .hero-scroll-cue, .product-card, .eco-score-card {
     transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease !important;

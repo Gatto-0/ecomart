@@ -1,7 +1,7 @@
 // src/components/TopBar.jsx
 // Shared top navigation bar across all pages.
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Logo from './Logo'
 import UtilityCluster from './UtilityCluster'
@@ -14,7 +14,9 @@ const navLinks = [
 ]
 
 export default function TopBar() {
+  const location = useLocation()
   const [scrolled, setScrolled] = useState(() => window.scrollY >= 40)
+  const onHero = location.pathname === '/' && !scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY >= 40)
@@ -24,7 +26,7 @@ export default function TopBar() {
 
   return (
     <nav
-      className={`site-topbar fixed top-0 left-0 right-0 z-40 select-none ${scrolled ? 'site-topbar--scrolled' : ''}`}
+      className={`site-topbar fixed top-0 left-0 right-0 z-40 select-none ${onHero ? 'site-topbar--on-hero' : ''} ${scrolled ? 'site-topbar--scrolled' : ''}`}
       aria-label="Main navigation bar"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">

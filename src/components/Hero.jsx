@@ -34,15 +34,15 @@ export default function Hero() {
 
       {/* Plain dark overlay keeps the existing photo and cream text readable. */}
       <div
-        className="absolute inset-0 bg-ink/45 pointer-events-none"
+        className="absolute inset-0 bg-ink/[0.82] pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Content vertically centered, aligned left */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-32 flex flex-col justify-center items-start text-left">
         <div className="max-w-4xl">
-          <h1 className="font-heading font-bold text-cream tracking-tight text-[clamp(3rem,8vw,8rem)] leading-[1.02]">
-            Where shopping meets the planet.
+          <h1 className="hero-headline font-heading text-white tracking-tight text-[clamp(3rem,8vw,8rem)]">
+            Where shopping meets the <span className="hero-accent">planet</span>.
           </h1>
 
           <p className="mt-6 font-medium text-cream flex items-center min-h-[3rem] text-[clamp(1.5rem,3vw,2.5rem)] leading-snug">
