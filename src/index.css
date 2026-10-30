@@ -193,6 +193,86 @@
   background: #C9E4B8;
 }
 
+.why-matters-card {
+  position: relative;
+  background-color: #FBF3E4;
+}
+
+.why-matters-picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 58%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.why-matters-picture--left-text {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 100%);
+}
+
+.why-matters-picture--right-text {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 60px, #000 100%);
+  mask-image: linear-gradient(to left, transparent 0, #000 60px, #000 100%);
+}
+
+.why-matters-image {
+  display: block;
+  object-position: center;
+}
+
+.why-matters-image--carbon-footprint,
+.why-matters-image--small-switch {
+  object-position: right center;
+}
+
+.why-matters-copy {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 42%;
+  max-width: 42%;
+  padding: 48px;
+  justify-content: center;
+  overflow-wrap: break-word;
+}
+
+.why-matters-copy--left {
+  left: 0;
+}
+
+.why-matters-copy--right {
+  right: 0;
+}
+
+.why-matters-heading,
+.why-matters-stat {
+  color: #2F4A35;
+}
+
+.why-matters-heading {
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.15;
+}
+
+.why-matters-body {
+  color: #2F4A35;
+}
+
+.why-matters-read-time,
+.why-matters-link {
+  color: #7A5638;
+}
+
+.why-matters-link:hover {
+  color: #2F4A35;
+}
+
 @media (max-width: 767px) {
   .eco-score-band {
     padding: 56px 20px;

@@ -3,74 +3,83 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { topics } from '../data/learn'
 
+const teaserImages = {
+  'carbon-footprint': {
+    src: '/images/why-it-matters/footprint.jpg',
+    alt: 'Carbon footprint impact of everyday products',
+  },
+  'why-plastic-matters': {
+    src: '/images/why-it-matters/plastic-9.jpg',
+    alt: 'Plastic waste and the small share that gets recycled',
+  },
+  'small-switch': {
+    src: '/images/why-it-matters/one-bulb.jpg',
+    alt: 'An energy-saving light bulb representing a small action',
+  },
+  greenwashing: {
+    src: '/images/why-it-matters/greenwashing.jpg',
+    alt: 'Greenwashing and misleading environmental claims',
+  },
+}
+
 function TeaserBox({ topic, index }) {
   const [imageFailed, setImageFailed] = useState(false)
   const isLeft = index % 2 === 0
-  const fallbackBg = isLeft ? '#E4EBDD' : '#F1E8D8'
+  const image = teaserImages[topic.slug]
 
   return (
     <article
       aria-label={topic.title}
-      style={{ backgroundColor: fallbackBg }}
-      className="group relative w-full rounded-2xl md:rounded-3xl rounded-l-none border-l-4 border-l-walnut overflow-hidden h-auto md:h-[360px] flex flex-col justify-center border-y border-r border-forest/10 p-6 sm:p-8 md:p-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      style={{ backgroundColor: '#FBF3E4' }}
+      className={`group why-matters-card why-matters-card--${isLeft ? 'left-text' : 'right-text'} relative w-full rounded-2xl md:rounded-3xl rounded-l-none border-l-4 border-l-walnut overflow-hidden h-auto md:h-[360px] border-y border-r border-forest/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
     >
-      {/* Background Image with Fallback */}
-      {topic.image && !imageFailed && (
-        <img
-          src={topic.image}
-          alt={topic.title}
-          onError={() => setImageFailed(true)}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
-        />
+      {/* Picture zone; the cream card remains visible if the image fails. */}
+      {image && !imageFailed && (
+        <div className={`why-matters-picture why-matters-picture--${isLeft ? 'left-text' : 'right-text'}`}>
+          <img
+            src={image.src}
+            alt={image.alt}
+            onError={() => setImageFailed(true)}
+            className={`why-matters-image why-matters-image--${topic.slug} h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none`}
+          />
+        </div>
       )}
 
-      {/* Gradient Overlay */}
-      <div
-        aria-hidden="true"
-        className={`absolute inset-0 pointer-events-none bg-[rgba(246,241,231,0.95)] ${
-          isLeft
-            ? 'md:bg-gradient-to-r md:from-[rgba(246,241,231,0.95)] md:via-[rgba(246,241,231,0.85)_50%] md:to-transparent'
-            : 'md:bg-gradient-to-l md:from-[rgba(246,241,231,0.95)] md:via-[rgba(246,241,231,0.85)_50%] md:to-transparent'
-        }`}
-      />
+      {/* Text zone */}
+      <div className={`why-matters-copy why-matters-copy--${isLeft ? 'left' : 'right'} flex flex-col text-left`}>
+        {/* 1. Bold hook line in Fraunces, large */}
+        <h3 className="why-matters-heading font-heading font-bold tracking-tight mb-4">
+          {topic.hook}
+        </h3>
 
-      {/* Text Block Content */}
-      <div className={`relative z-10 flex w-full ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}>
-        <div className="w-full md:w-[45%] flex flex-col text-left">
-          {/* 1. Bold hook line in Fraunces, large */}
-          <h3 className="font-heading font-bold text-2xl sm:text-3xl md:text-[28px] lg:text-3xl text-forest tracking-tight leading-tight mb-4">
-            {topic.hook}
-          </h3>
-
-          {/* 2. Stat on one line: value in Fraunces, label beside in smaller size */}
-          {topic.stat && (
-            <div className="flex items-baseline gap-2.5 sm:gap-3 mb-6">
-              <span className="font-heading font-bold text-xl sm:text-2xl text-forest shrink-0">
-                {topic.stat.value}
-              </span>
-              <span className="text-xs sm:text-sm text-charcoal/85 leading-snug">
-                {topic.stat.label}
-              </span>
-            </div>
-          )}
-
-          {/* 3. Row with readTime and Learn more link with arrow icon */}
-          <div className="flex items-center gap-4 mt-auto">
-            <span className="text-xs font-medium text-charcoal/70">
-              {topic.readTime}
+        {/* 2. Stat on one line: value in Fraunces, label beside in smaller size */}
+        {topic.stat && (
+          <div className="flex items-baseline gap-2.5 sm:gap-3 mb-6">
+            <span className="why-matters-stat font-heading font-bold text-xl sm:text-2xl shrink-0">
+              {topic.stat.value}
             </span>
-            <Link
-              to={`/learn?topic=${topic.slug}`}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-leaf transition-colors group/link"
-            >
-              <span>Learn more</span>
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover/link:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </Link>
+            <span className="why-matters-body text-xs sm:text-sm leading-snug">
+              {topic.stat.label}
+            </span>
           </div>
+        )}
+
+        {/* 3. Row with readTime and Learn more link with arrow icon */}
+        <div className="flex items-center gap-4 mt-auto">
+          <span className="why-matters-read-time text-xs font-medium">
+            {topic.readTime}
+          </span>
+          <Link
+            to={`/learn?topic=${topic.slug}`}
+            className="why-matters-link inline-flex items-center gap-1.5 text-sm font-semibold transition-colors group/link"
+          >
+            <span>Learn more</span>
+            <ArrowRight
+              size={16}
+              className="transition-transform group-hover/link:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </div>
     </article>
