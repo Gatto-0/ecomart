@@ -11,9 +11,6 @@ export default function ScoreExample() {
         {/* Card Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-forest/10">
           <div>
-            <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-1 block">
-              Worked Example
-            </span>
             <h3
               id="worked-example-heading"
               className="font-heading text-2xl sm:text-3xl font-semibold text-forest tracking-tight"

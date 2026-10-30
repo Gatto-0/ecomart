@@ -75,7 +75,7 @@ export default function ProductCard({ product }) {
   const categoryName = categoryData?.name ?? product.category
 
   return (
-    <article className="group flex flex-col bg-white rounded-2xl rounded-l-none border-l-4 border-l-forest overflow-hidden shadow-xs border-y border-r border-forest/10 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
+    <article className="product-card group flex flex-col overflow-hidden">
       {/* Photo */}
       <div className="relative aspect-square overflow-hidden bg-forest/5">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
@@ -129,19 +129,19 @@ export default function ProductCard({ product }) {
         {/* Text holder chips with tinted backgrounds */}
         <div className="flex flex-wrap gap-1.5 pt-0.5">
           {product.total >= 9 && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#F6E3B8] text-[#5A3D12] text-[11px] font-medium leading-tight">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-marigold text-ink text-[11px] font-medium leading-tight">
               Top eco pick
             </span>
           )}
 
           {product.tags?.includes('plastic-free') && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#E4EBDD] text-[#2F4A35] text-[11px] font-medium leading-tight">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-white text-forest text-[11px] font-medium leading-tight border border-line">
               Plastic-free
             </span>
           )}
 
           {isVagueClaim && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#F3D5C8] text-[#6E2F1B] text-[11px] font-medium leading-tight border border-[#C4694A]/25">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-rust text-white text-[11px] font-medium leading-tight">
               Unverified claim
             </span>
           )}

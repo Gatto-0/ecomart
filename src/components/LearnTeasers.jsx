@@ -30,7 +30,7 @@ function TeaserBox({ topic, index }) {
   return (
     <article
       aria-label={topic.title}
-      style={{ backgroundColor: '#FBF3E4' }}
+      style={{ backgroundColor: 'var(--cream)' }}
       className={`group why-matters-card why-matters-card--${isLeft ? 'left-text' : 'right-text'} relative w-full rounded-2xl md:rounded-3xl rounded-l-none border-l-4 border-l-walnut overflow-hidden h-auto md:h-[360px] border-y border-r border-forest/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
     >
       {/* Picture zone; the cream card remains visible if the image fails. */}

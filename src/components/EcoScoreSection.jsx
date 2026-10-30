@@ -12,8 +12,6 @@ const iconMap = {
 export default function EcoScoreSection() {
   return (
     <section aria-labelledby="eco-score-heading" className="eco-score-band w-full">
-      <span className="eco-score-glow eco-score-glow--marigold" aria-hidden="true" />
-      <span className="eco-score-glow eco-score-glow--terracotta" aria-hidden="true" />
       <div className="eco-score-content">
         <div className="eco-score-heading mb-6">
           <h2

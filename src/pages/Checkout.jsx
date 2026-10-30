@@ -234,7 +234,7 @@ export default function Checkout() {
 
         {/* Order summary */}
         <aside className="w-full lg:w-80 lg:sticky lg:top-24 flex flex-col gap-4">
-          <div className="rounded-2xl border border-forest/15 bg-cream p-5 flex flex-col gap-4 shadow-sm">
+          <div className="checkout-summary rounded-2xl border border-forest/15 bg-cream p-5 flex flex-col gap-4 shadow-sm">
             <h2 className="font-heading font-semibold text-lg text-forest">
               Order summary
             </h2>
@@ -257,7 +257,7 @@ export default function Checkout() {
               })}
             </ul>
 
-            <div className="flex justify-between text-sm font-semibold text-charcoal border-t border-forest/10 pt-3">
+            <div className="cart-total flex justify-between text-sm font-semibold text-charcoal border-t border-forest/10 pt-3">
               <span>Total</span>
               <span className="font-heading text-base">{fmt(subtotal)}</span>
             </div>

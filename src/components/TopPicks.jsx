@@ -42,7 +42,7 @@ export default function TopPicks() {
   }
 
   return (
-    <section className="w-full bg-[#E4EBDD] py-16 sm:py-24">
+    <section className="w-full bg-sage py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header with Title & Arrow Buttons */}
         <div className="flex items-end justify-between mb-8 sm:mb-10">

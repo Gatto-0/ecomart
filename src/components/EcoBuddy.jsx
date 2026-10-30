@@ -306,7 +306,7 @@ export default function EcoBuddy() {
           {showBubble && (
             <div
               aria-hidden="true"
-              className="pointer-events-none relative mb-1 bg-[#FBF3E4] text-[#2F4A35] text-xs font-semibold px-3 py-2 rounded-xl shadow-md border border-[#2F4A35]/10 whitespace-nowrap select-none"
+              className="pointer-events-none relative mb-1 bg-cream text-forest text-xs font-semibold px-3 py-2 rounded-xl shadow-md border border-forest/10 whitespace-nowrap select-none"
             >
               Ask me about eco swaps
               {/* Downward tail */}
@@ -314,7 +314,7 @@ export default function EcoBuddy() {
                 className="absolute -bottom-[7px] right-5 w-3 h-[7px] overflow-hidden pointer-events-none"
                 aria-hidden="true"
               >
-                <span className="block w-3 h-3 bg-[#FBF3E4] border border-[#2F4A35]/10 rotate-45 translate-y-[-6px] translate-x-[0px]" />
+                <span className="block w-3 h-3 bg-cream border border-forest/10 rotate-45 translate-y-[-6px] translate-x-[0px]" />
               </span>
             </div>
           )}
@@ -324,7 +324,7 @@ export default function EcoBuddy() {
               type="button"
               onClick={handleOpen}
               aria-label="Open Eco Buddy"
-              className={`relative w-14 h-14 rounded-full bg-[#2F4A35] text-[#FBF3E4] shadow-xl flex items-center justify-center transition-all duration-150 hover:scale-105 hover:ring-2 hover:ring-[#E3A63B] hover:ring-offset-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E3A63B] focus:ring-offset-2${!hasBeenOpened ? ' eco-buddy-pulse' : ''}`}
+              className="relative w-14 h-14 rounded-full bg-forest text-cream shadow-xl flex items-center justify-center transition-all duration-150 hover:scale-105 hover:ring-2 hover:ring-marigold hover:ring-offset-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-marigold focus:ring-offset-2"
             >
               <MessageCircle size={26} aria-hidden="true" />
             </button>
@@ -337,10 +337,10 @@ export default function EcoBuddy() {
         <aside
           role="region"
           aria-label="Eco Buddy, your shop assistant"
-          className="fixed bottom-6 right-6 z-40 w-[380px] h-[520px] max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)] bg-[#FBF3E4] rounded-[16px] shadow-2xl border border-forest/15 flex flex-col overflow-hidden text-charcoal font-sans"
+          className="fixed bottom-6 right-6 z-40 w-[380px] h-[520px] max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)] bg-cream rounded-[16px] shadow-2xl border border-forest/15 flex flex-col overflow-hidden text-charcoal font-sans"
         >
           {/* Header */}
-          <div className="px-4 py-3 bg-[#FBF3E4] border-b border-forest/10 flex items-center justify-between shrink-0">
+          <div className="px-4 py-3 bg-cream border-b border-forest/10 flex items-center justify-between shrink-0">
             <div>
               <h2 className="font-heading font-semibold text-xl text-forest tracking-tight leading-tight">
                 Eco Buddy
@@ -368,8 +368,8 @@ export default function EcoBuddy() {
                   <div
                     className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-line shadow-xs ${
                       isBot
-                        ? 'bg-[#E4EBDD] text-forest rounded-tl-xs mr-auto'
-                        : 'bg-[#2F4A35] text-[#FBF3E4] rounded-tr-xs ml-auto'
+                        ? 'bg-sage text-forest rounded-tl-xs mr-auto'
+                        : 'bg-forest text-cream rounded-tr-xs ml-auto'
                     }`}
                   >
                     <div>{msg.text}</div>
@@ -437,7 +437,7 @@ export default function EcoBuddy() {
 
             {/* Typing indicator (approx 400ms or while looking up) */}
             {isTyping && (
-              <div className="bg-[#E4EBDD] text-forest rounded-2xl rounded-tl-xs mr-auto px-3.5 py-2.5 text-sm shadow-xs inline-flex items-center gap-2">
+              <div className="bg-sage text-forest rounded-2xl rounded-tl-xs mr-auto px-3.5 py-2.5 text-sm shadow-xs inline-flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-forest/60 animate-bounce [animation-delay:-0.3s]" />
                 <span className="w-1.5 h-1.5 rounded-full bg-forest/60 animate-bounce [animation-delay:-0.15s]" />
                 <span className="w-1.5 h-1.5 rounded-full bg-forest/60 animate-bounce" />
@@ -455,7 +455,7 @@ export default function EcoBuddy() {
           {/* Input & Send */}
           <form
             onSubmit={onSubmit}
-            className="px-3 py-2.5 bg-[#FBF3E4] border-t border-forest/10 flex items-center gap-2 shrink-0"
+            className="px-3 py-2.5 bg-cream border-t border-forest/10 flex items-center gap-2 shrink-0"
           >
             <input
               ref={inputRef}
@@ -470,7 +470,7 @@ export default function EcoBuddy() {
               type="submit"
               disabled={!inputValue.trim() || isTyping}
               aria-label="Send message"
-              className="w-9 h-9 rounded-full bg-[#2F4A35] text-[#FBF3E4] flex items-center justify-center hover:bg-[#2F4A35]/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
+              className="w-9 h-9 rounded-full bg-forest text-cream flex items-center justify-center hover:bg-forest/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
             >
               <Send size={15} aria-hidden="true" />
             </button>

@@ -8,7 +8,7 @@ function CategoryCardImage({ src, alt }) {
   if (hasError) {
     return (
       <div
-        className="w-full h-full bg-[#E4EBDD] flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
+        className="w-full h-full bg-sage flex flex-col items-center justify-center p-4 transition-transform duration-500 ease-out group-hover:scale-105"
         aria-label={alt}
       >
         <svg
@@ -56,7 +56,7 @@ export default function CategoryGrid() {
             <Link
               key={category.slug}
               to={`/shop?category=${category.slug}`}
-              className={`group relative overflow-hidden rounded-2xl rounded-l-none border-l-4 border-l-walnut block bg-[#E4EBDD] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
+              className={`group relative overflow-hidden rounded-2xl rounded-l-none border-l-4 border-l-walnut block bg-sage hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
                 isLarge
                   ? 'col-span-1 lg:col-span-2 h-56 sm:h-72 lg:h-80'
                   : 'col-span-1 lg:col-span-1 h-48 sm:h-60 lg:h-64'
@@ -68,15 +68,15 @@ export default function CategoryGrid() {
                 alt={category.imageAlt || `${category.title} category`}
               />
 
-              {/* Dark gradient overlay */}
+              {/* Flat dark overlay keeps the category title readable. */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-[rgba(47,74,53,0.75)] to-transparent pointer-events-none"
+                className="absolute inset-0 bg-ink/55 pointer-events-none"
                 aria-hidden="true"
               />
 
               {/* Title at bottom */}
               <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 z-10">
-                <h3 className="font-heading font-semibold text-cream text-base sm:text-lg lg:text-xl group-hover:text-leaf transition-colors leading-tight">
+                <h3 className="font-heading font-semibold text-cream text-base sm:text-lg lg:text-xl transition-colors leading-tight">
                   {category.title}
                 </h3>
               </div>

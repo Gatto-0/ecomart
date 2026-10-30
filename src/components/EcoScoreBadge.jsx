@@ -4,18 +4,18 @@ export default function EcoScoreBadge({ total = 0, size = 'sm', className = '' }
   const band = getBand(total)
   const isLg = size === 'lg'
   const isYellow = band.key === 'yellow' || band.color === '#E2B646'
-  const textColor = isYellow ? 'text-forest' : 'text-cream'
+  const isPoor = band.key === 'clay'
 
   return (
     <div
       title={band.label}
       aria-label={`Eco score ${total}/10 (${band.label})`}
-      className={`rounded-full shrink-0 flex items-center justify-center font-heading font-bold select-none transition-transform duration-200 ${textColor} ${
+      className={`eco-score-badge rounded-full shrink-0 flex items-center justify-center font-heading font-bold select-none transition-transform duration-200 ${
         isLg
           ? 'w-20 h-20 text-2xl sm:w-24 sm:h-24 sm:text-3xl shadow-md'
           : 'w-11 h-11 text-xs shadow-xs'
       } ${className}`}
-      style={{ backgroundColor: band.color }}
+      style={{ backgroundColor: isPoor ? 'var(--rust)' : isYellow || band.key === 'green' ? 'var(--marigold)' : '#fff', color: isPoor ? '#fff' : 'var(--ink)', border: isYellow || band.key === 'green' || isPoor ? 'none' : '1px solid var(--line)' }}
     >
       <span className="leading-none">
         {total}

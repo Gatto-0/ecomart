@@ -57,7 +57,7 @@ export default function LearnModal({ topic, onClose }) {
         </button>
 
         {/* Photo on top with capped height and object-fit: cover */}
-        <div className="relative h-[120px] sm:h-[160px] w-full bg-[#CBD5C8] shrink-0 overflow-hidden">
+        <div className="relative h-[120px] sm:h-[160px] w-full bg-sage shrink-0 overflow-hidden">
           <LearnCardImage src={topic.image} alt={topic.title} />
         </div>
 
@@ -78,7 +78,7 @@ export default function LearnModal({ topic, onClose }) {
 
           {/* Stat Box */}
           {topic.stat && (
-            <div className="my-6 p-5 sm:p-6 rounded-2xl bg-[#EFE9DC] border border-forest/10 flex flex-col sm:flex-row items-baseline sm:items-center gap-3 sm:gap-4">
+            <div className="my-6 p-5 sm:p-6 rounded-2xl bg-cream border border-forest/10 flex flex-col sm:flex-row items-baseline sm:items-center gap-3 sm:gap-4">
               <span className="font-heading text-3xl sm:text-4xl font-bold text-forest whitespace-nowrap">
                 {topic.stat.value}
               </span>

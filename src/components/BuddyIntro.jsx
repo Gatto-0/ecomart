@@ -10,9 +10,6 @@ export default function BuddyIntro() {
     <section aria-labelledby="buddy-heading" className="w-full">
       <div className="bg-white/60 border border-forest/10 rounded-2xl p-6 sm:p-8 shadow-xs">
         <div className="max-w-3xl mb-8">
-          <span className="text-xs uppercase tracking-wider font-semibold text-leaf mb-2 block">
-            Assistant
-          </span>
           <h2
             id="buddy-heading"
             className="font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-forest tracking-tight mb-3"

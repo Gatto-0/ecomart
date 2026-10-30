@@ -58,7 +58,7 @@ export default function Learn() {
             className="group grid grid-cols-1 md:grid-cols-2 bg-cream rounded-3xl overflow-hidden border border-forest/10 hover:border-forest/30 transition-all duration-300 hover:shadow-lg cursor-pointer text-left select-none mb-12 sm:mb-16"
           >
             {/* Photo left on desktop, stacked on mobile */}
-            <div className="relative aspect-video w-full overflow-hidden bg-[#E4EBDD]">
+            <div className="relative aspect-video w-full overflow-hidden bg-sage">
               <LearnCardImage
                 src={featuredTopic.image}
                 alt={featuredTopic.imageAlt || featuredTopic.title}

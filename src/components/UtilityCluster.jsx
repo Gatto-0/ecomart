@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Heart, ShoppingCart, User, Menu } from 'lucide-react'
+import { Heart, ShoppingCart, User } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 import { useAuth } from '../context/AuthContext'
 
 export default function UtilityCluster({
   className = '',
-  onOpenMenu,
-  menuButtonRef,
+  scrolled = false,
 }) {
   const { count: cartCount } = useCart()
   const { count: wishlistCount } = useWishlist()
@@ -48,7 +47,7 @@ export default function UtilityCluster({
 
   return (
     <div
-      className={`h-11 px-4 sm:px-5 rounded-full bg-forest text-cream flex items-center gap-4 sm:gap-5 shadow-md border border-forest/20 ${className}`}
+      className={`utility-cluster h-11 px-4 sm:px-5 flex items-center gap-4 sm:gap-5 ${scrolled ? 'utility-cluster--scrolled' : ''} ${className}`}
       role="region"
       aria-label="User utilities"
     >
@@ -56,11 +55,11 @@ export default function UtilityCluster({
       <Link
         to="/wishlist"
         aria-label="Wishlist"
-        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
+        className="utility-icon relative transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
       >
         <Heart size={18} aria-hidden="true" />
         {wishlistCount > 0 && (
-          <span className="absolute -top-1 -right-2 flex items-center justify-center min-w-4 h-4 px-1 rounded-full bg-clay text-cream text-[10px] font-semibold leading-none">
+          <span className="count-badge absolute -top-1 -right-2 flex items-center justify-center min-w-4 h-4 px-1 rounded-full bg-clay text-cream text-[10px] font-semibold leading-none">
             {wishlistCount}
           </span>
         )}
@@ -70,10 +69,10 @@ export default function UtilityCluster({
       <Link
         to="/cart"
         aria-label="Cart"
-        className="relative text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
+        className="utility-icon relative transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
       >
         <ShoppingCart size={18} aria-hidden="true" />
-        <span className="absolute -top-1 -right-2 flex items-center justify-center min-w-4 h-4 px-1 rounded-full bg-clay text-cream text-[10px] font-semibold leading-none">
+        <span className="count-badge absolute -top-1 -right-2 flex items-center justify-center min-w-4 h-4 px-1 rounded-full bg-clay text-cream text-[10px] font-semibold leading-none">
           {cartCount}
         </span>
       </Link>
@@ -89,7 +88,7 @@ export default function UtilityCluster({
             aria-haspopup="dialog"
             aria-expanded={accountOpen}
             aria-controls="account-menu"
-            className="w-9 h-9 rounded-full bg-forest text-cream flex items-center justify-center font-semibold text-sm cursor-pointer btn-minor hover:text-forest"
+            className="account-badge w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm cursor-pointer btn-minor"
           >
             {user.name.trim().charAt(0).toUpperCase() || '?'}
           </button>
@@ -99,7 +98,7 @@ export default function UtilityCluster({
               id="account-menu"
               role="dialog"
               aria-label="Account menu"
-              className="absolute right-0 top-full z-50 mt-2 w-64 rounded-2xl border border-forest/10 bg-cream p-4 text-forest shadow-xl"
+              className="account-dropdown absolute right-0 top-full z-50 mt-2 w-64 border border-line bg-white p-4 text-forest"
             >
               <div className="mb-3 border-b border-forest/10 pb-3">
                 <p className="font-heading font-semibold leading-snug">{user.name}</p>
@@ -135,22 +134,12 @@ export default function UtilityCluster({
         <Link
           to="/login"
           aria-label="Login"
-          className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
+          className="utility-icon transition-colors flex items-center justify-center p-1 rounded-full btn-minor"
         >
           <User size={18} aria-hidden="true" />
         </Link>
       )}
 
-      {/* Menu button: icon only, no text, aria-label "Open menu" */}
-      <button
-        ref={menuButtonRef}
-        type="button"
-        onClick={onOpenMenu}
-        aria-label="Open menu"
-        className="text-cream hover:text-leaf transition-colors flex items-center justify-center p-1 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-leaf rounded-full btn-minor"
-      >
-        <Menu size={18} aria-hidden="true" />
-      </button>
     </div>
   )
 }

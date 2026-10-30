@@ -185,7 +185,7 @@ export default function Login() {
             className="absolute inset-0 h-full w-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(47,74,53,0.8)] via-[rgba(47,74,53,0.3)] to-transparent" />
+        <div className="absolute inset-0 bg-ink/45" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-10 lg:p-14">
           <h1 className="font-heading text-4xl font-semibold leading-tight text-cream lg:text-5xl">
             Every swap counts.
@@ -193,7 +193,7 @@ export default function Login() {
         </div>
       </section>
 
-      <section className="flex items-center justify-center rounded-3xl border border-forest/10 bg-cream p-8 shadow-sm lg:p-12">
+      <section className="login-form-card flex items-center justify-center rounded-3xl border border-forest/10 bg-cream p-8 shadow-sm lg:p-12">
         <div className="w-full max-w-md">
           <div className="mb-7 grid grid-cols-2 rounded-full border border-forest/15 bg-white/70 p-1" role="tablist" aria-label="Account access">
             <button
@@ -232,7 +232,7 @@ export default function Login() {
             aria-labelledby={mode === 'login' ? 'login-tab' : 'signup-tab'}
           >
             {notice && (
-              <p className="mb-5 rounded-xl bg-sage px-4 py-3 text-sm text-forest" role="status">
+              <p className="notice-panel mb-5 rounded-xl px-4 py-3 text-sm" role="status">
                 {notice}
               </p>
             )}

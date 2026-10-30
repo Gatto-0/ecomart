@@ -51,7 +51,7 @@ function CartRow({ item }) {
   const lineTotal = product.price * item.qty
 
   return (
-    <li className="flex gap-3 sm:gap-4 py-5 border-b border-forest/10 last:border-0">
+    <li className="cart-item flex gap-3 sm:gap-4 py-5 border-b border-forest/10 last:border-0">
       {/* Photo */}
       <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-forest/5 shrink-0">
         <CartItemImage product={product} />
@@ -210,7 +210,7 @@ export default function Cart() {
 
         {/* Sticky summary */}
         <aside className="w-full lg:w-80 lg:sticky lg:top-24 flex flex-col gap-4">
-          <div className="rounded-2xl border border-forest/15 bg-cream p-5 flex flex-col gap-4 shadow-sm">
+          <div className="cart-summary rounded-2xl border border-forest/15 bg-cream p-5 flex flex-col gap-4 shadow-sm">
             <h2 className="font-heading font-semibold text-lg text-forest">
               Order summary
             </h2>
@@ -220,7 +220,7 @@ export default function Cart() {
               <span className="font-semibold text-charcoal">{fmt(subtotal)}</span>
             </div>
 
-            <div className="flex justify-between text-sm font-semibold text-charcoal">
+            <div className="cart-total flex justify-between text-sm font-semibold text-charcoal">
               <span>Total</span>
               <span className="font-heading text-base">{fmt(subtotal)}</span>
             </div>
