@@ -57,7 +57,7 @@ const p = (category, name, price, scores, description, tags, impact) => {
     description,
     tags,
     impact: { plasticG: impact[0], co2Kg: impact[1] },
-    image: `/images/products/${slug}.jpg`,
+    image: `/images/products/${slug}.${slug === "led-bulbs-9-w-pack-of-4" ? "png" : "jpg"}`,
   };
 };
 
