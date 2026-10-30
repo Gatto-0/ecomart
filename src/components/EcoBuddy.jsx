@@ -6,9 +6,19 @@ import { Link } from 'react-router-dom'
 import { MessageCircle, X, Send } from 'lucide-react'
 import EcoScoreBadge from './EcoScoreBadge'
 import { useCart } from '../context/CartContext'
-import { categories } from '../data/products'
+import { categories, products } from '../data/products'
+import { criteria } from '../data/ecoScore'
 import { answer, STARTER_CHIPS } from '../lib/ecoBuddy'
 import { lookup } from '../lib/wikiLookup'
+import { askEcoBuddy } from '../lib/openrouter'
+
+const ECO_BUDDY_SYSTEM_PROMPT = `You are Eco Buddy, the friendly assistant of EcoMart, a store that helps people swap everyday products for eco-friendlier ones. Answer briefly (max 4 sentences), in plain text, with practical tips. Only talk about sustainability, eco-friendly products, swaps, recycling and using the EcoMart site. If asked about something else, politely steer back. Never invent prices, scores or products that are not on the site.
+
+EcoMart products (name, price, EcoScore total): ${products.map((product) => `${product.name}, ₹${product.price}, ${product.total}/10`).join('; ')}.
+EcoScore totals are out of 10 across five criteria, each scored 0–2: ${criteria.map((criterion) => `${criterion.name} (${criterion.levels.map((level, points) => `${points}: ${level}`).join(', ')})`).join('; ')}.`
+
+const OPENROUTER_ENABLED = Boolean(import.meta.env.VITE_OPENROUTER_API_KEY)
+const FRIENDLY_API_ERROR = "Sorry, I couldn't reach my brain just now. Please try again."
 
 /**
  * Compact thumbnail image with category and placeholder fallbacks.
@@ -73,6 +83,14 @@ export default function EcoBuddy() {
 
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
+  const requestControllerRef = useRef(null)
+  const requestTimerRef = useRef(null)
+
+  useEffect(() => () => {
+    requestControllerRef.current?.abort()
+    requestControllerRef.current = null
+    if (requestTimerRef.current) clearTimeout(requestTimerRef.current)
+  }, [])
 
   // Auto-scroll to the newest message
   useEffect(() => {
@@ -125,62 +143,119 @@ export default function EcoBuddy() {
   const handleSendMessage = useCallback(
     (text) => {
       const trimmed = text.trim()
-      if (!trimmed) return
+      if (!trimmed || requestControllerRef.current) return
 
       const userMessage = {
         id: `user-${Date.now()}-${Math.random()}`,
         sender: 'user',
         text: trimmed,
       }
+      const controller = new AbortController()
+      requestControllerRef.current = controller
 
       setMessages((prev) => [...prev, userMessage])
       setIsTyping(true)
 
       // 400ms typing indicator before processing response
-      setTimeout(async () => {
-        const response = answer(trimmed, { cartItems })
+      requestTimerRef.current = setTimeout(async () => {
+        requestTimerRef.current = null
 
-        // If eco term requires lookup and has a term, try Wikipedia lookup
-        if (response.needsLookup && response.term) {
-          setIsLookingUp(true)
-          const wikiResult = await lookup(response.term)
-          setIsLookingUp(false)
-
-          if (wikiResult) {
-            const botMessage = {
-              id: `bot-${Date.now()}-${Math.random()}`,
-              sender: 'bot',
-              text: wikiResult.text,
-              wiki: {
-                title: wikiResult.title,
-                url: wikiResult.url,
-              },
-              chips: [
-                `Tell me about ${wikiResult.title}`,
-                'Show plastic-free products',
-                'Top eco picks',
+        try {
+          if (OPENROUTER_ENABLED) {
+            const history = messages
+              .filter((message) => (message.sender === 'user' || message.sender === 'bot') && message.text)
+              .slice(-10)
+              .map((message) => ({
+                role: message.sender === 'user' ? 'user' : 'assistant',
+                content: message.text,
+              }))
+            const reply = await askEcoBuddy(
+              [
+                { role: 'system', content: ECO_BUDDY_SYSTEM_PROMPT },
+                ...history,
+                { role: 'user', content: trimmed },
               ],
-            }
-            setMessages((prev) => [...prev, botMessage])
-            setIsTyping(false)
+              controller.signal
+            )
+            if (controller.signal.aborted) return
+
+            const localData = answer(trimmed, { cartItems })
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: `bot-${Date.now()}-${Math.random()}`,
+                sender: 'bot',
+                text: reply,
+                products: localData.products,
+                chips: localData.chips?.length ? localData.chips : STARTER_CHIPS.slice(0, 3),
+                didYouMean: localData.didYouMean,
+              },
+            ])
             return
           }
-        }
 
-        // Built-in answer (or fallback if lookup returns null)
-        const botMessage = {
-          id: `bot-${Date.now()}-${Math.random()}`,
-          sender: 'bot',
-          text: response.text,
-          products: response.products,
-          chips: response.chips,
-          didYouMean: response.didYouMean,
+          const response = answer(trimmed, { cartItems })
+
+          // If eco term requires lookup and has a term, try Wikipedia lookup
+          if (response.needsLookup && response.term) {
+            setIsLookingUp(true)
+            const wikiResult = await lookup(response.term)
+            if (controller.signal.aborted) return
+
+            if (wikiResult) {
+              setMessages((prev) => [
+                ...prev,
+                {
+                  id: `bot-${Date.now()}-${Math.random()}`,
+                  sender: 'bot',
+                  text: wikiResult.text,
+                  wiki: { title: wikiResult.title, url: wikiResult.url },
+                  chips: [
+                    `Tell me about ${wikiResult.title}`,
+                    'Show plastic-free products',
+                    'Top eco picks',
+                  ],
+                },
+              ])
+              return
+            }
+          }
+
+          if (!controller.signal.aborted) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: `bot-${Date.now()}-${Math.random()}`,
+                sender: 'bot',
+                text: response.text,
+                products: response.products,
+                chips: response.chips,
+                didYouMean: response.didYouMean,
+              },
+            ])
+          }
+        } catch {
+          if (!controller.signal.aborted) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: `bot-${Date.now()}-${Math.random()}`,
+                sender: 'bot',
+                text: FRIENDLY_API_ERROR,
+              },
+            ])
+          }
+        } finally {
+          if (requestControllerRef.current === controller) {
+            requestControllerRef.current = null
+            setIsTyping(false)
+            setIsLookingUp(false)
+            inputRef.current?.focus()
+          }
         }
-        setMessages((prev) => [...prev, botMessage])
-        setIsTyping(false)
       }, 400)
     },
-    [cartItems]
+    [cartItems, messages]
   )
 
   // Listen for window event "ecobuddy:ask" (mounted even when panel is closed)
@@ -210,6 +285,16 @@ export default function EcoBuddy() {
   const onChipClick = (chipText) => {
     if (isTyping) return
     handleSendMessage(chipText)
+  }
+
+  const handleClose = () => {
+    requestControllerRef.current?.abort()
+    requestControllerRef.current = null
+    if (requestTimerRef.current) clearTimeout(requestTimerRef.current)
+    requestTimerRef.current = null
+    setIsTyping(false)
+    setIsLookingUp(false)
+    setIsOpen(false)
   }
 
   return (
@@ -266,7 +351,7 @@ export default function EcoBuddy() {
             </div>
             <button
               type="button"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-label="Close Eco Buddy"
               className="w-8 h-8 rounded-full flex items-center justify-center text-forest/80 hover:text-forest hover:bg-forest/10 transition-colors cursor-pointer"
             >
@@ -375,6 +460,7 @@ export default function EcoBuddy() {
             <input
               ref={inputRef}
               type="text"
+              aria-label="Ask Eco Buddy"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask Eco Buddy..."
