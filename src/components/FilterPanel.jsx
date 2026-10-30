@@ -73,7 +73,7 @@ function BandList({ selected, onChange }) {
                 />
                 <span
                   className="w-3 h-3 rounded-full shrink-0"
-                  style={{ backgroundColor: band.color }}
+                  style={{ backgroundColor: band.key === 'clay' ? 'var(--rust)' : 'var(--marigold)' }}
                   aria-hidden="true"
                 />
                 <span className="text-sm text-charcoal/80 group-hover:text-charcoal transition-colors leading-tight">

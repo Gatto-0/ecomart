@@ -67,8 +67,8 @@ export default function ScoreExample() {
                           style={{
                             backgroundColor:
                               segment <= score
-                                ? band.color
-                                : 'rgba(34, 42, 37, 0.15)',
+                                ? band.key === 'clay' ? 'var(--rust)' : 'var(--marigold)'
+                                : 'rgba(20, 19, 15, 0.15)',
                           }}
                         />
                       ))}

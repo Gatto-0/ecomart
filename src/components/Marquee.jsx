@@ -31,8 +31,8 @@ export default function Marquee() {
     <div className="marquee-wrapper w-full py-4 overflow-hidden select-none">
       <style>{`
         .marquee-wrapper {
-          --oak: #2F4A35;
-          --cream: #EFE8DA;
+          --oak: #161C13;
+          --cream: #F1E9D8;
           --leaf-brown: #E3A63B;
           background-color: var(--oak);
           color: var(--cream);

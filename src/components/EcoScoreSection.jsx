@@ -35,7 +35,7 @@ export default function EcoScoreSection() {
                 key={band.key}
                 className="h-full transition-opacity"
                 style={{
-                  backgroundColor: band.color,
+                  backgroundColor: band.key === 'clay' ? 'var(--rust)' : 'var(--marigold)',
                   width: `${(count / 11) * 100}%`,
                 }}
                 title={`${band.label} (${band.min}–${band.max})`}
@@ -50,7 +50,7 @@ export default function EcoScoreSection() {
               <div className="flex items-center gap-2 mb-1">
                 <span
                   className="w-3 h-3 rounded-full shrink-0"
-                  style={{ backgroundColor: band.color }}
+                  style={{ backgroundColor: band.key === 'clay' ? 'var(--rust)' : 'var(--marigold)' }}
                   aria-hidden="true"
                 />
                 <span className="eco-score-summary-heading font-heading font-semibold text-sm">

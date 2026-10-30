@@ -185,7 +185,7 @@ export default function Login() {
             className="absolute inset-0 h-full w-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-ink/45" />
+        <div className="absolute inset-0 bg-[rgba(20,19,15,0.45)]" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-10 lg:p-14">
           <h1 className="font-heading text-4xl font-semibold leading-tight text-cream lg:text-5xl">
             Every swap counts.

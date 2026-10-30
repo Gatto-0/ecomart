@@ -34,7 +34,7 @@ export default function Hero() {
 
       {/* Plain dark overlay keeps the existing photo and cream text readable. */}
       <div
-        className="absolute inset-0 bg-ink/[0.82] pointer-events-none"
+        className="absolute inset-0 bg-[rgba(20,19,15,0.82)] pointer-events-none"
         aria-hidden="true"
       />
 

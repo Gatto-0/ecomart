@@ -9,9 +9,9 @@
 
 @theme {
   --color-ink: #161C13;
-  --color-forest: #2F4A35;
-  --color-forest-dark: #243C2B;
-  --color-cream: #EFE8DA;
+  --color-forest: #161C13;
+  --color-forest-dark: #161C13;
+  --color-cream: #F1E9D8;
   --color-sage: #FFFFFF;
   --color-walnut: #6B5A48;
   --color-walnut-dark: #55483A;
@@ -22,7 +22,7 @@
   --color-terracotta-pale: #F3D5C8;
   --color-terracotta-text: #6E2F1B;
   --color-sand: #D9B98A;
-  --color-leaf: #5E8C4A;
+  --color-leaf: #161C13;
   --color-charcoal: #161C13;
   --color-clay: #C8502D;
   --color-sun: #E3A63B;
@@ -34,16 +34,16 @@
 
 :root {
   --ink: #161C13;
-  --forest: #2F4A35;
-  --cream: #EFE8DA;
+  --forest: #161C13;
+  --cream: #F1E9D8;
   --sage: #FFFFFF;
   --walnut: #6B5A48;
   --marigold: #E3A63B;
   --terracotta: #C8502D;
-  --teal: #1F4A4F;
+  --teal: #161C13;
   --sand: #D9B98A;
-  --leaf: #5E8C4A;
-  --leaf-light: #A7C98D;
+  --leaf: #5E7A58;
+  --leaf-light: #9DB894;
   --oak: #6F4E32;
   --leaf-brown: #B59B5A;
   --rust: #C8502D;
@@ -62,23 +62,23 @@
 .eco-score-summary {
   background: var(--sage); border-color: var(--line); color: var(--ink); box-shadow: none;
 }
-.eco-score-summary .bg-forest\/5 { background-color: rgba(22, 28, 19, 0.06); }
+.eco-score-summary .bg-forest\/5 { background-color: rgba(20, 19, 15, 0.06); }
 .eco-score-summary-heading { color: var(--forest); }
 .eco-score-summary-range { color: var(--ink); }
 .eco-score-card {
-  color: var(--cream); background: rgba(251, 243, 228, 0.14);
-  border: 1px solid rgba(251, 243, 228, 0.35); border-radius: 4px;
+  color: var(--cream); background: rgba(241, 233, 216, 0.14);
+  border: 1px solid rgba(241, 233, 216, 0.35); border-radius: 4px;
   box-shadow: none; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   transition: transform 200ms ease, background-color 200ms ease;
 }
-.eco-score-card:hover { transform: translateY(-2px); background: rgba(251, 243, 228, 0.2); }
+.eco-score-card:hover { transform: translateY(-2px); background: rgba(241, 233, 216, 0.2); }
 @supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
-  .eco-score-card, .eco-score-card:hover { background: rgba(47, 74, 53, .85); }
+  .eco-score-card, .eco-score-card:hover { background: rgba(20, 19, 15, .85); }
 }
 .eco-score-icon { border-radius: 4px; }
 .eco-score-card h3 { color: var(--cream); }
 .eco-score-card > p, .eco-score-description { color: var(--cream); }
-.eco-score-list { border-color: rgba(251, 243, 228, 0.3); }
+.eco-score-list { border-color: rgba(241, 233, 216, 0.3); }
 .eco-score-list > span { color: var(--cream); }
 .eco-score-pill--0 { color: #fff; background: var(--rust); }
 .eco-score-pill--1 { color: var(--ink); background: #fff; border: 1px solid var(--line); }
@@ -128,7 +128,7 @@
 .site-topbar::before {
   content: ''; position: absolute; inset: 0 0 auto; height: 140px; z-index: -1;
   pointer-events: none; opacity: 0;
-  background: linear-gradient(to bottom, rgba(22, 28, 19, .65), transparent);
+  background: linear-gradient(to bottom, rgba(20, 19, 15, .65), transparent);
   transition: opacity 250ms ease;
 }
 .site-topbar--on-hero::before { opacity: 1; }
@@ -144,11 +144,11 @@
 .site-topbar--on-hero .utility-icon { color: var(--cream); }
 .site-topbar--on-hero .utility-icon:hover { background: transparent; color: var(--marigold); }
 .site-topbar--on-hero .account-badge {
-  color: var(--cream); background: transparent; border: 1px solid rgba(251, 243, 228, .75);
+  color: var(--cream); background: transparent; border: 1px solid rgba(241, 233, 216, .75);
 }
 .site-topbar--scrolled {
   height: 60px; padding-block: 6px; background: var(--ink); color: var(--cream);
-  border-bottom-color: #3A4434;
+  border-bottom-color: #34312A;
 }
 .site-topbar--scrolled::before { opacity: 0; }
 .site-logo { transition: transform 250ms ease; }
@@ -165,7 +165,7 @@
 .utility-cluster--scrolled .utility-icon:hover { color: var(--marigold); }
 .account-badge { background: var(--forest); color: var(--cream); }
 .utility-cluster--scrolled .account-badge { background: var(--cream); color: var(--ink); }
-.account-dropdown { border-radius: 4px; box-shadow: 0 4px 14px rgba(22, 28, 19, .14); }
+.account-dropdown { border-radius: 4px; box-shadow: 0 4px 14px rgba(20, 19, 15, .14); }
 .topbar-nav-link {
   color: var(--forest); border-radius: 4px; letter-spacing: .08em; text-transform: uppercase;
   transition: background-color 250ms ease, color 250ms ease, transform 250ms ease, font-size 250ms ease;
@@ -186,7 +186,12 @@
 .btn-major:focus-visible, .btn-minor:focus-visible, .topbar-nav-link:focus-visible {
   outline: 2px solid var(--forest); outline-offset: 2px;
 }
+.btn-major:focus-visible { outline-color: var(--cream); }
+.site-topbar--on-hero .topbar-nav-link:focus-visible { outline-color: var(--cream); }
 .site-topbar--scrolled .topbar-nav-link:focus-visible { outline-color: var(--marigold); }
+[class*="bg-forest"]:focus-visible, [class*="bg-ink"]:focus-visible { outline-color: var(--cream); }
+[class~="bg-forest"]:focus-visible, [class~="bg-forest"] :focus-visible { outline-color: var(--cream); }
+.why-matters-card :focus-visible { outline-color: var(--ink); }
 .btn-minor {
   border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
   border-radius: 4px; text-transform: uppercase; letter-spacing: .08em;
@@ -229,7 +234,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.02em; line-height:
 :where([class*="rounded-"]) { border-radius: 4px !important; }
 .account-badge, .eco-score-badge, .count-badge { border-radius: 9999px !important; }
 :where([class*="shadow-"]) { box-shadow: none !important; }
-.account-dropdown { box-shadow: 0 4px 14px rgba(22, 28, 19, .14) !important; }
+.account-dropdown { box-shadow: 0 4px 14px rgba(20, 19, 15, .14) !important; }
 .login-form-card { background: #fff; border-color: var(--line); box-shadow: none !important; }
 button { text-transform: uppercase; letter-spacing: .08em; }
 .topbar-nav-link { text-transform: uppercase; letter-spacing: .08em; }

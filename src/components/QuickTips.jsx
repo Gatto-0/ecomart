@@ -11,7 +11,7 @@ export default function QuickTips() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
           {quickTips.map((tip, index) => (
             <div key={index} className="flex items-start gap-4">
-              <span className="font-heading font-bold text-2xl sm:text-3xl text-leaf shrink-0 leading-none">
+              <span className="font-heading font-bold text-2xl sm:text-3xl text-marigold shrink-0 leading-none">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div>

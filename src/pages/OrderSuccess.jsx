@@ -64,7 +64,7 @@ export default function OrderSuccess() {
 
       {/* Impact banner */}
       <div className="rounded-2xl bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-start mb-8">
-        <Leaf size={32} className="text-leaf shrink-0 mt-0.5" aria-hidden="true" />
+        <Leaf size={32} className="text-marigold shrink-0 mt-0.5" aria-hidden="true" />
         <div>
           <h2 className="font-heading font-semibold text-lg mb-1">Your green impact</h2>
           <p className="text-cream/85 text-sm leading-relaxed">

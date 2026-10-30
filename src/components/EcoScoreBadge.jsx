@@ -3,7 +3,7 @@ import { getBand } from '../data/ecoScore'
 export default function EcoScoreBadge({ total = 0, size = 'sm', className = '' }) {
   const band = getBand(total)
   const isLg = size === 'lg'
-  const isYellow = band.key === 'yellow' || band.color === '#E2B646'
+  const isGood = band.key === 'green'
   const isPoor = band.key === 'clay'
 
   return (
@@ -15,7 +15,7 @@ export default function EcoScoreBadge({ total = 0, size = 'sm', className = '' }
           ? 'w-20 h-20 text-2xl sm:w-24 sm:h-24 sm:text-3xl shadow-md'
           : 'w-11 h-11 text-xs shadow-xs'
       } ${className}`}
-      style={{ backgroundColor: isPoor ? 'var(--rust)' : isYellow || band.key === 'green' ? 'var(--marigold)' : '#fff', color: isPoor ? '#fff' : 'var(--ink)', border: isYellow || band.key === 'green' || isPoor ? 'none' : '1px solid var(--line)' }}
+      style={{ backgroundColor: isPoor ? 'var(--rust)' : isGood ? 'var(--leaf)' : '#fff', color: isPoor || isGood ? '#fff' : 'var(--ink)', border: isPoor || isGood ? 'none' : '1px solid var(--line)' }}
     >
       <span className="leading-none">
         {total}
