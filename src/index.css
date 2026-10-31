@@ -53,6 +53,8 @@
 
 .eco-score-band {
   background: var(--forest);
+  padding: 48px 36px;
+  border-radius: 20px;
 }
 .eco-score-heading h2 { color: var(--cream); }
 .eco-score-heading h2::after {
@@ -65,24 +67,79 @@
 .eco-score-summary .bg-forest\/5 { background-color: rgba(20, 19, 15, 0.06); }
 .eco-score-summary-heading { color: var(--forest); }
 .eco-score-summary-range { color: var(--ink); }
+
+/* Criteria scoring cards: Mist Teal (#B8DEDB) with pure black (#000000) text and darker teal border (#8FC4C0) */
 .eco-score-card {
-  color: var(--cream); background: rgba(241, 233, 216, 0.14);
-  border: 1px solid rgba(241, 233, 216, 0.35); border-radius: 4px;
-  box-shadow: none; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  transition: transform 200ms ease, background-color 200ms ease;
+  color: #000000;
+  background-color: #B8DEDB !important;
+  border: 1px solid #8FC4C0 !important;
+  border-radius: 16px !important;
+  padding: 28px !important;
+  box-sizing: border-box;
+  box-shadow: none;
+  transition: transform 200ms ease;
 }
-.eco-score-card:hover { transform: translateY(-2px); background: rgba(241, 233, 216, 0.2); }
-@supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
-  .eco-score-card, .eco-score-card:hover { background: rgba(20, 19, 15, .85); }
+.eco-score-card:hover {
+  transform: translateY(-2px);
 }
-.eco-score-icon { border-radius: 4px; }
-.eco-score-card h3 { color: var(--cream); }
-.eco-score-card > p, .eco-score-description { color: var(--cream); }
-.eco-score-list { border-color: rgba(241, 233, 216, 0.3); }
-.eco-score-list > span { color: var(--cream); }
-.eco-score-pill--0 { color: #fff; background: var(--rust); }
-.eco-score-pill--1 { color: var(--ink); background: #fff; border: 1px solid var(--line); }
-.eco-score-pill--2 { color: var(--ink); background: var(--marigold); }
+.eco-score-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px !important;
+  background: rgba(31, 77, 58, 0.08);
+  border: 1px solid #8FC4C0;
+  color: #1F4D3A !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.eco-score-icon svg {
+  color: #1F4D3A !important;
+  stroke: #1F4D3A !important;
+}
+.eco-score-card h3 {
+  color: #000000 !important;
+  font-family: var(--font-heading) !important;
+}
+.eco-score-card > p,
+.eco-score-description {
+  color: #000000 !important;
+}
+.eco-score-list {
+  border-top: 1px solid #8FC4C0 !important;
+}
+.eco-score-list > span {
+  color: #000000 !important;
+}
+.eco-score-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  padding: 2px 8px;
+  border-radius: 9999px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+.eco-score-pill--0 {
+  color: #FFFFFF !important;
+  background-color: #C4694A !important;
+}
+.eco-score-pill--1 {
+  color: #000000 !important;
+  background-color: #E3A63B !important;
+}
+.eco-score-pill--2 {
+  color: #FFFFFF !important;
+  background-color: #2F5D46 !important;
+}
+
+/* Marquee: hover pause CSS */
+.marquee-wrapper:hover .marquee-track,
+.marquee-track:hover {
+  animation-play-state: paused !important;
+}
 
 .why-matters-card { background-color: var(--cream); }
 .why-matters-picture {

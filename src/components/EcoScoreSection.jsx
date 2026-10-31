@@ -72,7 +72,7 @@ export default function EcoScoreSection() {
           return (
             <div
               key={criterion.key}
-              className="eco-score-card flex flex-col"
+              className="eco-score-card flex flex-col h-full"
             >
               <div className="eco-score-icon flex items-center justify-center mb-4 shrink-0">
                 <Icon size={20} strokeWidth={2} aria-hidden="true" />
